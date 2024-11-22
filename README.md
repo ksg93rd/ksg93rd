@@ -1,4 +1,4 @@
 Cowboy
 ======
-My name is Kenneth Gordon and this is 
+My name is Ksg93rd and this is 
 My first repository
