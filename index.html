@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>GenieBot Smart Contract Reviewer</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="hero">
+      <div>
+        <p class="eyebrow">GenieBot.pro / ChatGPT API Key</p>
+        <h1>GenieBot Smart Contract Reviewer</h1>
+        <p class="subtitle">
+          Lightweight, ready-to-deploy contract risk screener that produces JSON-only results aligned
+          to your schema.
+        </p>
+        <div class="hero-actions">
+          <button id="loadSample" class="ghost">Load sample contract</button>
+          <button id="clearAll" class="ghost">Clear</button>
+        </div>
+      </div>
+      <div class="hero-card">
+        <h2>Instant Outputs</h2>
+        <ul>
+          <li>Schema-valid JSON output</li>
+          <li>Theme detection + confidence levels</li>
+          <li>Risk highlights + extracted penalties</li>
+          <li>Audit trail of findings</li>
+        </ul>
+      </div>
+    </header>
+
+    <main>
+      <section class="panel">
+        <h2>Contract Input</h2>
+        <p class="hint">Paste the contract text between the markers and run analysis.</p>
+        <textarea id="contractInput" rows="14" placeholder="<<<CONTRACT_TEXT_START>>>
+[Paste your contract here]
+<<<CONTRACT_TEXT_END>>>"></textarea>
+        <div class="controls">
+          <button id="analyze" class="primary">Analyze Contract</button>
+          <button id="copyJson" class="ghost">Copy JSON</button>
+          <button id="downloadJson" class="ghost">Download JSON</button>
+        </div>
+        <div class="meta">
+          <div>
+            <strong>Detected Theme:</strong>
+            <span id="themeLabel">—</span>
+          </div>
+          <div>
+            <strong>Overall Risk:</strong>
+            <span id="riskLabel">—</span>
+          </div>
+          <div>
+            <strong>Last Run:</strong>
+            <span id="lastRun">—</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>JSON Output (Schema-Compliant)</h2>
+        <div class="output-toolbar">
+          <label>
+            <input type="checkbox" id="prettyPrint" checked /> Pretty print
+          </label>
+          <span id="validationStatus" class="badge">Awaiting analysis</span>
+        </div>
+        <pre id="jsonOutput" aria-live="polite">{
+  "redFlags": [],
+  "overallRisk": "LOW",
+  "overallConfidence": "LOW",
+  "topIssuesForUser": [],
+  "classification": {
+    "contractType": "UNCLEAR",
+    "party1Type": "UNCLEAR",
+    "party2Type": "UNCLEAR",
+    "themeUsed": "US_GENERAL_COMMERCIAL",
+    "themeConfidence": "LOW"
+  },
+  "extractedPenalties": [],
+  "meta": { "analysisQuality": "LOW_CONFIDENCE", "errors": [] }
+}</pre>
+      </section>
+
+      <section class="grid">
+        <article class="panel">
+          <h2>Application Enhancements</h2>
+          <ol>
+            <li>Automatic theme selection across 10 US agreement types.</li>
+            <li>Penalty extraction with annualized interest estimation.</li>
+            <li>Asymmetry detection for sanctions and termination rights.</li>
+            <li>Schema validation to guarantee deploy-safe JSON.</li>
+            <li>Export-ready output for API ingestion or downstream workflows.</li>
+          </ol>
+        </article>
+        <article class="panel">
+          <h2>User Experience Enhancements</h2>
+          <ol>
+            <li>Sample contract loader for instant demos.</li>
+            <li>Copy + download buttons for quick sharing.</li>
+            <li>Real-time analysis metadata with theme/risk badges.</li>
+            <li>Accessible, high-contrast layout optimized for scanning.</li>
+            <li>Pretty-print toggle for readable or compact JSON.</li>
+          </ol>
+        </article>
+      </section>
+    </main>
+
+    <footer>
+      <p>
+        This tool provides informational screening only and should be reviewed with a qualified
+        attorney when needed.
+      </p>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>
