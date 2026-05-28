@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Emoji Oracle is a lightweight educational game for translating emojis into messages and messages into emojis." />
+    <title>Emoji Oracle — Decode. Speak. Share.</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="hero" aria-labelledby="gameTitle">
+        <div class="hero-copy">
+          <p class="eyebrow">🎮 lightweight learning game</p>
+          <h1 id="gameTitle">Emoji Oracle</h1>
+          <p class="hero-text">Decode emojis into messages, translate words back into emojis, speak your guesses, and climb the leaderboard.</p>
+          <div class="hero-actions">
+            <button id="startBtn" class="btn primary" type="button">Start challenge</button>
+            <button id="shareBtn" class="btn ghost" type="button" disabled>Share score</button>
+          </div>
+        </div>
+        <div class="hero-orb" aria-hidden="true">
+          <span>😄</span><span>💬</span><span>🚀</span><span>🧠</span>
+        </div>
+      </section>
+
+      <section class="control-panel" aria-label="Game setup">
+        <label>
+          Player name
+          <input id="playerName" maxlength="24" autocomplete="nickname" placeholder="Guest Oracle" />
+        </label>
+        <label>
+          Game mode
+          <select id="modeSelect">
+            <option value="mixed">Mixed mastery</option>
+            <option value="emoji-to-text">Emoji → Message</option>
+            <option value="text-to-emoji">Message → Emoji</option>
+          </select>
+        </label>
+        <label>
+          Difficulty
+          <select id="levelSelect">
+            <option value="all">All levels</option>
+            <option value="rookie">🌱 Rookie</option>
+            <option value="spark">⚡ Spark</option>
+            <option value="pro">🚀 Pro</option>
+          </select>
+        </label>
+      </section>
+
+      <section class="game-grid">
+        <article id="promptCard" class="prompt-card is-idle" aria-live="polite">
+          <div class="card-topline">
+            <span id="levelBadge" class="badge">🌈 Ready</span>
+            <span id="modeBadge" class="badge subtle">Mixed</span>
+          </div>
+          <p id="promptLabel" class="prompt-label">Press start to receive your first clue</p>
+          <div id="promptValue" class="prompt-value">🧩✨</div>
+          <form id="answerForm" class="answer-form">
+            <label class="sr-only" for="answerInput">Your answer</label>
+            <input id="answerInput" placeholder="Your translation appears here..." disabled />
+            <button class="btn primary" type="submit">Submit</button>
+          </form>
+          <div class="tool-row">
+            <button id="speakBtn" class="btn tool" type="button" disabled>🎙 Speak</button>
+            <button id="hintBtn" class="btn tool" type="button" disabled>💡 Hint</button>
+            <button id="skipBtn" class="btn tool" type="button" disabled>⏭ Skip</button>
+          </div>
+          <p id="feedback" class="feedback neutral">Choose a mode and start when you are ready.</p>
+          <p id="lesson" class="lesson">Built for beginners, creators, classrooms, families, and emoji pros.</p>
+        </article>
+
+        <aside class="score-panel" aria-label="Score and leaderboard">
+          <div class="stats">
+            <div><span id="score">0</span><small>Score</small></div>
+            <div><span id="streak">0x</span><small>Streak</small></div>
+            <div><span id="timer">40s</span><small>Timer</small></div>
+          </div>
+          <div id="progress" class="progress" role="progressbar" aria-label="Round progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+            <span id="progressFill"></span>
+          </div>
+          <p id="challengeCount" class="challenge-count">1 / 10</p>
+          <div class="leaderboard-header">
+            <h2>Local leaderboard</h2>
+            <button id="resetBtn" class="link-button" type="button">Reset</button>
+          </div>
+          <ol id="leaderboard" class="leaderboard"></ol>
+        </aside>
+      </section>
+
+      <section class="features" aria-label="Game features">
+        <article><strong>Speak or type</strong><span>Use browser speech recognition where supported, with typing as a fast fallback.</span></article>
+        <article><strong>Adaptive challenge</strong><span>Rookie to Pro prompts teach literal, symbolic, and metaphorical emoji meaning.</span></article>
+        <article><strong>Shareable wins</strong><span>Copy or native-share your score to challenge friends and classmates.</span></article>
+      </section>
+    </main>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script type="module" src="src/app.js"></script>
+  </body>
+</html>
