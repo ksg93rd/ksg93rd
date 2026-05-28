@@ -22,6 +22,15 @@ test("similarityScore handles partial token overlap", () => {
   assert.equal(similarityScore("running very late", "running late") >= 0.66, true);
 });
 
+test("similarityScore rejects a single-word input that is a substring of a longer expected answer", () => {
+  assert.equal(similarityScore("pizza", "i love pizza") < 0.72, true);
+  assert.equal(similarityScore("love", "i love pizza") < 0.72, true);
+});
+
+test("evaluateAnswer rejects single-word guesses for multi-word answers", () => {
+  assert.equal(evaluateAnswer("pizza", challenge).isCorrect, false);
+});
+
 test("calculateRoundScore rewards speed and penalizes hints without going below floor", () => {
   const noHint = calculateRoundScore({ challenge, streak: 2, secondsRemaining: 20, usedHint: false });
   const withHint = calculateRoundScore({ challenge, streak: 2, secondsRemaining: 20, usedHint: true });
