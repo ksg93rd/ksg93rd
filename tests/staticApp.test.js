@@ -8,7 +8,8 @@ const ROOT = process.cwd();
 const MIME_TYPES = new Map([
   [".html", "text/html"],
   [".css", "text/css"],
-  [".js", "text/javascript"]
+  [".js", "text/javascript"],
+  [".mp4", "video/mp4"]
 ]);
 
 async function readText(path) {
@@ -46,7 +47,10 @@ test("static HTML references the required app assets and controls", async () => 
     "hintBtn",
     "skipBtn",
     "leaderboard",
-    "shareBtn"
+    "shareBtn",
+    "demoBtn",
+    "demoModal",
+    "demoVideo"
   ]) {
     assert.match(html, new RegExp(`id="${id}"`), `missing #${id}`);
   }
@@ -68,7 +72,7 @@ test("all browser assets are served successfully by a static server", async () =
   const { port } = server.address();
 
   try {
-    for (const asset of ["/", "/index.html", "/styles.css", "/src/app.js", "/src/challenges.js", "/src/gameLogic.js"]) {
+    for (const asset of ["/", "/index.html", "/styles.css", "/src/app.js", "/src/challenges.js", "/src/gameLogic.js", "/docs/demo.mp4"]) {
       const response = await fetch(`http://127.0.0.1:${port}${asset}`);
       assert.equal(response.status, 200, `${asset} should return 200`);
       assert.equal((await response.text()).length > 0, true, `${asset} should not be empty`);

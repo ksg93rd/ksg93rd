@@ -16,6 +16,7 @@
           <p class="hero-text">Decode emojis into messages, translate words back into emojis, speak your guesses, and climb the leaderboard.</p>
           <div class="hero-actions">
             <button id="startBtn" class="btn primary" type="button">Start challenge</button>
+            <button id="demoBtn" class="btn demo-btn" type="button">▶ Watch demo</button>
             <button id="shareBtn" class="btn ghost" type="button" disabled>Share score</button>
           </div>
         </div>
@@ -95,6 +96,22 @@
       </section>
     </main>
     <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <!-- Demo video modal -->
+    <div id="demoModal" class="demo-modal" role="dialog" aria-modal="true" aria-label="How to play Emoji Oracle" hidden>
+      <div class="demo-modal-backdrop"></div>
+      <div class="demo-modal-box">
+        <div class="demo-modal-header">
+          <h2>How to play</h2>
+          <button id="demoCloseBtn" class="demo-close-btn" type="button" aria-label="Close demo video">✕</button>
+        </div>
+        <video id="demoVideo" class="demo-video" controls preload="metadata" playsinline>
+          <source src="docs/demo.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    </div>
+
     <script type="module" src="src/app.js"></script>
   </body>
 </html>
