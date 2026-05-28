@@ -36,6 +36,7 @@ const els = {
 
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 let recognition;
+let isListening = false;
 let timerId;
 let state = {
   deck: [],
@@ -157,6 +158,7 @@ function startGame() {
 }
 
 function nextChallenge(delay = 1050) {
+  window.clearInterval(timerId);
   window.setTimeout(() => {
     state.index += 1;
     renderChallenge();
@@ -215,7 +217,7 @@ function saveLeaderboard() {
     date: new Date().toISOString()
   };
   const updated = [...board, entry]
-    .sort((a, b) => b.score - a.score || b.streak - a.streak)
+    .sort((a, b) => b.score - a.score || b.streak - a.streak || new Date(b.date) - new Date(a.date))
     .slice(0, 8);
   localStorage.setItem(LEADERBOARD_KEY, JSON.stringify(updated));
 }
@@ -267,6 +269,7 @@ function submitAnswer(event) {
 }
 
 function showHint() {
+  if (!state.active) return;
   const challenge = getCurrentChallenge();
   if (!challenge) return;
   state.usedHint = true;
@@ -292,10 +295,12 @@ function setupSpeech() {
   recognition.maxAlternatives = 1;
 
   recognition.addEventListener("start", () => {
+    isListening = true;
     els.speakBtn.classList.add("listening");
     els.speakBtn.textContent = "Listening…";
   });
   recognition.addEventListener("end", () => {
+    isListening = false;
     els.speakBtn.classList.remove("listening");
     els.speakBtn.textContent = "🎙 Speak";
   });
@@ -304,7 +309,10 @@ function setupSpeech() {
     els.answerInput.value = transcript;
     showToast(`Heard: ${transcript}`);
   });
-  recognition.addEventListener("error", () => showToast("Speech did not connect. Typing works perfectly too."));
+  recognition.addEventListener("error", () => {
+    isListening = false;
+    showToast("Speech did not connect. Typing works perfectly too.");
+  });
 }
 
 async function shareScore() {
@@ -332,7 +340,7 @@ function bindEvents() {
   els.skipBtn.addEventListener("click", skipChallenge);
   els.shareBtn.addEventListener("click", shareScore);
   els.resetBtn.addEventListener("click", resetLeaderboard);
-  els.speakBtn.addEventListener("click", () => recognition?.start());
+  els.speakBtn.addEventListener("click", () => { if (!isListening) recognition?.start(); });
   [els.playerName, els.modeSelect, els.levelSelect].forEach((el) => el.addEventListener("change", saveState));
 }
 

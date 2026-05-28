@@ -39,7 +39,9 @@ export function similarityScore(input, answer) {
 
   if (!normalizedInput || !normalizedAnswer) return 0;
   if (normalizedInput === normalizedAnswer) return 1;
-  if (normalizedInput.includes(normalizedAnswer) || normalizedAnswer.includes(normalizedInput)) return 0.88;
+  // Only reward containment when the player's input is at least as long as the answer,
+  // preventing short single-word inputs from matching longer expected answers.
+  if (normalizedInput.length >= normalizedAnswer.length && normalizedInput.includes(normalizedAnswer)) return 0.88;
 
   const inputTokens = new Set(tokenize(input));
   const answerTokens = new Set(tokenize(answer));
@@ -76,7 +78,12 @@ export function buildRoundDeck({ mode = "mixed", level = "all" } = {}) {
     return modeMatches && levelMatches;
   });
 
-  return [...filtered].sort(() => Math.random() - 0.5);
+  const arr = [...filtered];
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
 }
 
 export function createShareText({ score, streak, playerName }) {
