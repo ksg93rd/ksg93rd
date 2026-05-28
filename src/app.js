@@ -89,8 +89,9 @@ function getCurrentChallenge() {
 
 function renderStats() {
   els.score.textContent = state.score.toLocaleString();
-  els.streak.textContent = `${state.streak}x`;
-  els.timer.textContent = `${state.secondsRemaining}s`;
+  els.streak.textContent = `${state.streak}×`;
+  els.timer.textContent = String(state.secondsRemaining);
+  els.timer.closest(".stat-box").classList.toggle("urgent", state.secondsRemaining <= 10 && state.active);
   els.challengeCount.textContent = `${Math.min(state.index + 1, state.deck.length)} / ${state.deck.length || CHALLENGES.length}`;
   const progress = state.deck.length ? ((state.index) / state.deck.length) * 100 : 0;
   els.progressFill.style.width = `${Math.min(progress, 100)}%`;
@@ -170,6 +171,13 @@ function nextChallenge(delay = 1050) {
   }, delay);
 }
 
+function triggerCardAnimation(cls) {
+  els.promptCard.classList.remove("shake", "pop");
+  void els.promptCard.offsetWidth;
+  els.promptCard.classList.add(cls);
+  window.setTimeout(() => els.promptCard.classList.remove(cls), 500);
+}
+
 function markCorrect(challenge, confidence) {
   const earned = calculateRoundScore({
     challenge,
@@ -180,19 +188,21 @@ function markCorrect(challenge, confidence) {
   state.score += earned;
   state.streak += 1;
   state.bestStreak = Math.max(state.bestStreak, state.streak);
-  els.feedback.textContent = `Correct! +${earned} points • confidence ${Math.round(confidence * 100)}%`;
+  els.feedback.textContent = `✅ Correct! +${earned} pts • ${Math.round(confidence * 100)}% match`;
   els.feedback.className = "feedback success";
   els.lesson.textContent = challenge.lesson;
+  triggerCardAnimation("pop");
   renderStats();
   nextChallenge();
 }
 
-function markIncorrect(message = "Not quite. Look at the pattern, learn the clue, then try the next one.") {
+function markIncorrect(message = "Not quite — check the lesson and nail the next one.") {
   const challenge = getCurrentChallenge();
   state.streak = 0;
-  els.feedback.textContent = message;
+  els.feedback.textContent = `❌ ${message}`;
   els.feedback.className = "feedback danger";
-  els.lesson.textContent = challenge ? `${challenge.lesson} Accepted examples: ${challenge.answers.slice(0, 2).join(" • ")}` : "";
+  els.lesson.textContent = challenge ? `${challenge.lesson} Accepted: ${challenge.answers.slice(0, 2).join(" · ")}` : "";
+  triggerCardAnimation("shake");
   renderStats();
   nextChallenge(1600);
 }
@@ -229,16 +239,17 @@ function saveLeaderboard() {
 
 function renderLeaderboard() {
   const board = loadJson(LEADERBOARD_KEY, []);
+  const medals = ["🥇", "🥈", "🥉"];
   els.leaderboard.innerHTML = board.length
     ? board.map((entry, index) => `
       <li>
-        <span class="rank">#${index + 1}</span>
+        <span class="rank">${medals[index] ?? `#${index + 1}`}</span>
         <strong>${escapeHtml(entry.name)}</strong>
         <span>${Number(entry.score).toLocaleString()} pts</span>
-        <small>${entry.streak}x streak</small>
+        <small>${entry.streak}× streak</small>
       </li>
     `).join("")
-    : `<li class="empty">No scores yet. Be the first emoji legend.</li>`;
+    : `<li class="empty">No scores yet — be the first! 🏆</li>`;
 }
 
 function escapeHtml(value) {

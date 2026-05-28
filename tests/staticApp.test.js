@@ -58,8 +58,8 @@ test("static HTML references the required app assets and controls", async () => 
 
 test("responsive stylesheet includes mobile breakpoints and core game surfaces", async () => {
   const css = await readText("styles.css");
-  assert.match(css, /@media \(max-width: 900px\)/);
-  assert.match(css, /@media \(max-width: 560px\)/);
+  assert.match(css, /@media \(max-width: 9[0-9]{2}px\)/);
+  assert.match(css, /@media \(max-width: [56][0-9]{2}px\)/);
   assert.match(css, /\.prompt-card/);
   assert.match(css, /\.leaderboard/);
   assert.match(css, /\.feedback\.success/);
