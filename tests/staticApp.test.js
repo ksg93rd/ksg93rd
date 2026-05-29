@@ -9,7 +9,7 @@ const MIME_TYPES = new Map([
   [".html", "text/html"],
   [".css", "text/css"],
   [".js", "text/javascript"],
-  [".mp4", "video/mp4"]
+  [".svg", "image/svg+xml"]
 ]);
 
 async function readText(path) {
@@ -31,39 +31,31 @@ function createStaticServer() {
   });
 }
 
-test("static HTML references the required app assets and controls", async () => {
+test("static HTML references the required app assets and Kismoe controls", async () => {
   const html = await readText("index.html");
-  assert.match(html, /<title>Emoji Oracle/);
-  assert.match(html, /href="styles.css"/);
-  assert.match(html, /type="module" src="src\/app.js"/);
+  assert.match(html, /Kismoe/, "missing Kismoe brand name");
+  assert.match(html, /href="styles.css"/, "missing styles.css link");
+  assert.match(html, /src="src\/app\.js"/, "missing src/app.js script");
 
   for (const id of [
-    "playerName",
-    "modeSelect",
-    "levelSelect",
-    "startBtn",
-    "answerInput",
-    "speakBtn",
-    "hintBtn",
-    "skipBtn",
-    "leaderboard",
-    "shareBtn",
-    "demoBtn",
-    "demoModal",
-    "demoVideo"
+    "authBtn",
+    "authModal",
+    "chatWidget",
+    "chatToggle",
+    "chatMessages",
+    "chatInput"
   ]) {
     assert.match(html, new RegExp(`id="${id}"`), `missing #${id}`);
   }
 });
 
-test("responsive stylesheet includes mobile breakpoints and core game surfaces", async () => {
+test("responsive stylesheet includes mobile breakpoints and core Kismoe surfaces", async () => {
   const css = await readText("styles.css");
-  assert.match(css, /@media \(max-width: 9[0-9]{2}px\)/);
-  assert.match(css, /@media \(max-width: [56][0-9]{2}px\)/);
-  assert.match(css, /\.prompt-card/);
-  assert.match(css, /\.leaderboard/);
-  assert.match(css, /\.feedback\.success/);
-  assert.match(css, /\.feedback\.danger/);
+  assert.match(css, /@media \(max-width: [0-9]+px\)/, "missing mobile breakpoint");
+  assert.match(css, /--bg-primary/, "missing CSS custom property --bg-primary");
+  assert.match(css, /--accent-blue/, "missing CSS custom property --accent-blue");
+  assert.match(css, /\.chat-widget/, "missing .chat-widget styles");
+  assert.match(css, /\.service-card/, "missing .service-card styles");
 });
 
 test("all browser assets are served successfully by a static server", async () => {
@@ -72,7 +64,7 @@ test("all browser assets are served successfully by a static server", async () =
   const { port } = server.address();
 
   try {
-    for (const asset of ["/", "/index.html", "/styles.css", "/src/app.js", "/src/challenges.js", "/src/gameLogic.js", "/docs/demo.mp4"]) {
+    for (const asset of ["/", "/index.html", "/styles.css", "/src/app.js", "/src/chat.js", "/src/services.js", "/src/aiResponses.js", "/favicon.svg"]) {
       const response = await fetch(`http://127.0.0.1:${port}${asset}`);
       assert.equal(response.status, 200, `${asset} should return 200`);
       assert.equal((await response.text()).length > 0, true, `${asset} should not be empty`);
