@@ -1,387 +1,322 @@
-import { CHALLENGES, LEVELS } from "./challenges.js";
-import { buildRoundDeck, calculateRoundScore, createShareText, evaluateAnswer, getLevel } from "./gameLogic.js";
+// Kismoe Business Services — Main App Orchestration
 
-const STORAGE_KEY = "emoji-oracle-state-v1";
-const LEADERBOARD_KEY = "emoji-oracle-leaderboard-v1";
-const ROUND_SECONDS = 40;
+import { SERVICES, getServiceById } from './services.js';
+import { initChat, openChat, setChatContext } from './chat.js';
+import { initOnboarding, openWizard, showHealthDashboard } from './onboarding.js';
+import { DOCUMENT_TEMPLATES, generateDocument, downloadDocument } from './documents.js';
 
-const els = {
-  playerName: document.querySelector("#playerName"),
-  modeSelect: document.querySelector("#modeSelect"),
-  levelSelect: document.querySelector("#levelSelect"),
-  startBtn: document.querySelector("#startBtn"),
-  promptCard: document.querySelector("#promptCard"),
-  promptLabel: document.querySelector("#promptLabel"),
-  promptValue: document.querySelector("#promptValue"),
-  levelBadge: document.querySelector("#levelBadge"),
-  modeBadge: document.querySelector("#modeBadge"),
-  answerForm: document.querySelector("#answerForm"),
-  answerInput: document.querySelector("#answerInput"),
-  speakBtn: document.querySelector("#speakBtn"),
-  hintBtn: document.querySelector("#hintBtn"),
-  skipBtn: document.querySelector("#skipBtn"),
-  feedback: document.querySelector("#feedback"),
-  lesson: document.querySelector("#lesson"),
-  score: document.querySelector("#score"),
-  streak: document.querySelector("#streak"),
-  timer: document.querySelector("#timer"),
-  progress: document.querySelector("#progress"),
-  progressFill: document.querySelector("#progressFill"),
-  leaderboard: document.querySelector("#leaderboard"),
-  shareBtn: document.querySelector("#shareBtn"),
-  resetBtn: document.querySelector("#resetBtn"),
-  challengeCount: document.querySelector("#challengeCount"),
-  toast: document.querySelector("#toast"),
-  demoBtn: document.querySelector("#demoBtn"),
-  demoModal: document.querySelector("#demoModal"),
-  demoVideo: document.querySelector("#demoVideo"),
-  demoCloseBtn: document.querySelector("#demoCloseBtn"),
-  demoModalBackdrop: document.querySelector(".demo-modal-backdrop")
-};
+// ── Init ────────────────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  initChat();
+  initOnboarding();
+  renderServiceCards();
+  initNavigation();
+  initIntersectionObserver();
+  initServicePanel();
+  initWebsiteBuilder();
+  initDocumentGenerator();
+  initPricing();
 
-const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-let recognition;
-let isListening = false;
-let timerId;
-let state = {
-  deck: [],
-  index: 0,
-  score: 0,
-  streak: 0,
-  bestStreak: 0,
-  secondsRemaining: ROUND_SECONDS,
-  usedHint: false,
-  active: false
-};
+  // Listen for openService events from roadmap buttons
+  document.addEventListener('openService', (e) => {
+    openServicePanel(e.detail.serviceId);
+  });
+});
 
-function loadJson(key, fallback) {
-  try {
-    return JSON.parse(localStorage.getItem(key)) ?? fallback;
-  } catch {
-    return fallback;
-  }
-}
+// ── Navigation ──────────────────────────────────────────────────────────────
+function initNavigation() {
+  // Smooth scroll nav links
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      const href = link.getAttribute('href');
+      if (href && href.startsWith('#')) {
+        e.preventDefault();
+        const target = document.querySelector(href);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          document.getElementById('navMenu')?.classList.remove('open');
+        }
+      }
+    });
+  });
 
-function saveState() {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify({
-    playerName: els.playerName.value,
-    mode: els.modeSelect.value,
-    level: els.levelSelect.value
-  }));
-}
+  // Mobile nav toggle
+  const navToggle = document.getElementById('navToggle');
+  const navMenu = document.getElementById('navMenu');
+  navToggle?.addEventListener('click', () => {
+    navMenu?.classList.toggle('open');
+  });
 
-function restorePreferences() {
-  const saved = loadJson(STORAGE_KEY, {});
-  els.playerName.value = saved.playerName ?? "";
-  els.modeSelect.value = saved.mode ?? "mixed";
-  els.levelSelect.value = saved.level ?? "all";
-}
-
-function showToast(message) {
-  els.toast.textContent = message;
-  els.toast.classList.add("show");
-  window.setTimeout(() => els.toast.classList.remove("show"), 2600);
-}
-
-function getCurrentChallenge() {
-  return state.deck[state.index];
-}
-
-function renderStats() {
-  els.score.textContent = state.score.toLocaleString();
-  els.streak.textContent = `${state.streak}×`;
-  els.timer.textContent = String(state.secondsRemaining);
-  els.timer.closest(".stat-box").classList.toggle("urgent", state.secondsRemaining <= 10 && state.active);
-  els.challengeCount.textContent = `${Math.min(state.index + 1, state.deck.length)} / ${state.deck.length || CHALLENGES.length}`;
-  const progress = state.deck.length ? ((state.index) / state.deck.length) * 100 : 0;
-  els.progressFill.style.width = `${Math.min(progress, 100)}%`;
-  els.progress.setAttribute("aria-valuenow", String(Math.round(progress)));
-}
-
-function renderChallenge() {
-  const challenge = getCurrentChallenge();
-
-  if (!challenge) {
-    finishGame();
-    return;
-  }
-
-  const level = getLevel(challenge.level);
-  state.secondsRemaining = ROUND_SECONDS;
-  state.usedHint = false;
-  els.promptLabel.textContent = challenge.promptLabel;
-  els.promptValue.textContent = challenge.prompt;
-  els.levelBadge.textContent = `${level.emoji} ${level.label}`;
-  els.modeBadge.textContent = challenge.mode === "emoji-to-text" ? "Emoji → Message" : "Message → Emoji";
-  els.answerInput.value = "";
-  els.answerInput.placeholder = challenge.mode === "emoji-to-text" ? "Type or speak the message..." : "Type or speak emojis...";
-  els.feedback.textContent = "Translate the clue. Use hint only if you need it.";
-  els.feedback.className = "feedback neutral";
-  els.lesson.textContent = level.description;
-  els.answerInput.focus();
-  renderStats();
-  restartTimer();
-}
-
-function restartTimer() {
-  window.clearInterval(timerId);
-  timerId = window.setInterval(() => {
-    if (!state.active) return;
-    state.secondsRemaining -= 1;
-    renderStats();
-    if (state.secondsRemaining <= 0) {
-      window.clearInterval(timerId);
-      markIncorrect("Time! The round moved on, but your streak can rebuild quickly.");
+  // Navbar scroll effect
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('mainNav');
+    if (nav) {
+      nav.classList.toggle('scrolled', window.scrollY > 50);
     }
-  }, 1000);
+  });
+
+  // CTA buttons
+  document.getElementById('heroStartBtn')?.addEventListener('click', openWizard);
+  document.getElementById('heroExploreBtn')?.addEventListener('click', () => {
+    document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' });
+  });
+  document.getElementById('startJourneyBtn')?.addEventListener('click', openWizard);
+  document.getElementById('ctaStartBtn')?.addEventListener('click', openWizard);
+  document.getElementById('heroChatBtn')?.addEventListener('click', openChat);
 }
 
-function startGame() {
-  saveState();
-  state = {
-    deck: buildRoundDeck({ mode: els.modeSelect.value, level: els.levelSelect.value }),
-    index: 0,
-    score: 0,
-    streak: 0,
-    bestStreak: 0,
-    secondsRemaining: ROUND_SECONDS,
-    usedHint: false,
-    active: true
-  };
+// ── Service Cards ───────────────────────────────────────────────────────────
+function renderServiceCards() {
+  const grid = document.getElementById('servicesGrid');
+  if (!grid) return;
 
-  if (!state.deck.length) {
-    state.deck = buildRoundDeck();
+  grid.innerHTML = SERVICES.map(service => `
+    <article class="service-card fade-in" data-service-id="${service.id}" role="button" tabindex="0" aria-label="View ${service.title} service">
+      <div class="service-card-icon">${service.icon}</div>
+      <h3 class="service-card-title">${service.title}</h3>
+      <p class="service-card-tagline">${service.tagline}</p>
+      <div class="service-card-badges">
+        ${service.doneForYou ? '<span class="badge badge-blue">Done-For-You</span>' : ''}
+        ${service.expertReview ? '<span class="badge badge-purple">Expert Review</span>' : ''}
+      </div>
+      <div class="service-card-footer">
+        <span class="service-includes">${service.includes.length} included items</span>
+        <span class="service-arrow">→</span>
+      </div>
+    </article>
+  `).join('');
+
+  // Click handlers
+  grid.querySelectorAll('.service-card').forEach(card => {
+    const open = () => openServicePanel(card.dataset.serviceId);
+    card.addEventListener('click', open);
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); }
+    });
+  });
+}
+
+// ── Service Panel ───────────────────────────────────────────────────────────
+function initServicePanel() {
+  document.getElementById('panelClose')?.addEventListener('click', closePanel);
+  document.getElementById('panelOverlay')?.addEventListener('click', closePanel);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closePanel();
+  });
+}
+
+function openServicePanel(serviceId) {
+  const service = getServiceById(serviceId);
+  if (!service) return;
+
+  const panel = document.getElementById('servicePanel');
+  const overlay = document.getElementById('panelOverlay');
+  if (!panel || !overlay) return;
+
+  document.getElementById('panelIcon').textContent = service.icon;
+  document.getElementById('panelTitle').textContent = service.title;
+  document.getElementById('panelTagline').textContent = service.tagline;
+  document.getElementById('panelForWho').textContent = service.forWho;
+
+  document.getElementById('panelIncludes').innerHTML = service.includes.map(i =>
+    `<li class="panel-list-item">✓ ${i}</li>`
+  ).join('');
+
+  document.getElementById('panelDeliverables').innerHTML = service.aiDeliverables.map(d =>
+    `<li class="panel-list-item deliverable">🤖 ${d}</li>`
+  ).join('');
+
+  const chatBtn = document.getElementById('panelChatBtn');
+  if (chatBtn) {
+    // Remove old handler
+    const clone = chatBtn.cloneNode(true);
+    chatBtn.parentNode.replaceChild(clone, chatBtn);
+    clone.addEventListener('click', () => {
+      const context = { title: service.title, chatPrompt: service.chatPrompt };
+      document.dispatchEvent(new CustomEvent('setChatContext', { detail: context }));
+      closePanel();
+    });
   }
 
-  els.promptCard.classList.remove("is-idle");
-  els.answerInput.disabled = false;
-  els.speakBtn.disabled = !SpeechRecognition;
-  els.hintBtn.disabled = false;
-  els.skipBtn.disabled = false;
-  els.shareBtn.disabled = false;
-  showToast("Game on. Decode fast, learn faster!");
-  renderChallenge();
+  panel.classList.add('open');
+  overlay.classList.add('active');
+  document.body.classList.add('panel-open');
 }
 
-function nextChallenge(delay = 1050) {
-  window.clearInterval(timerId);
-  window.setTimeout(() => {
-    state.index += 1;
-    renderChallenge();
-  }, delay);
+function closePanel() {
+  document.getElementById('servicePanel')?.classList.remove('open');
+  document.getElementById('panelOverlay')?.classList.remove('active');
+  document.body.classList.remove('panel-open');
 }
 
-function triggerCardAnimation(cls) {
-  els.promptCard.classList.remove("shake", "pop");
-  void els.promptCard.offsetWidth;
-  els.promptCard.classList.add(cls);
-  window.setTimeout(() => els.promptCard.classList.remove(cls), 500);
+// ── Intersection Observer (fade-in animations) ──────────────────────────────
+function initIntersectionObserver() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 }
 
-function markCorrect(challenge, confidence) {
-  const earned = calculateRoundScore({
-    challenge,
-    streak: state.streak + 1,
-    secondsRemaining: state.secondsRemaining,
-    usedHint: state.usedHint
+// ── Website Builder ─────────────────────────────────────────────────────────
+function initWebsiteBuilder() {
+  const form = document.getElementById('websiteBuilderForm');
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    generateWebsiteBrief();
   });
-  state.score += earned;
-  state.streak += 1;
-  state.bestStreak = Math.max(state.bestStreak, state.streak);
-  els.feedback.textContent = `✅ Correct! +${earned} pts • ${Math.round(confidence * 100)}% match`;
-  els.feedback.className = "feedback success";
-  els.lesson.textContent = challenge.lesson;
-  triggerCardAnimation("pop");
-  renderStats();
-  nextChallenge();
 }
 
-function markIncorrect(message = "Not quite — check the lesson and nail the next one.") {
-  const challenge = getCurrentChallenge();
-  state.streak = 0;
-  els.feedback.textContent = `❌ ${message}`;
-  els.feedback.className = "feedback danger";
-  els.lesson.textContent = challenge ? `${challenge.lesson} Accepted: ${challenge.answers.slice(0, 2).join(" · ")}` : "";
-  triggerCardAnimation("shake");
-  renderStats();
-  nextChallenge(1600);
+function generateWebsiteBrief() {
+  const bizName = document.getElementById('wb-bizName')?.value || 'Your Business';
+  const industry = document.getElementById('wb-industry')?.value || 'your industry';
+  const targetAudience = document.getElementById('wb-audience')?.value || 'your ideal customers';
+  const goal = document.getElementById('wb-goal')?.value || 'grow your business';
+
+  const brief = `WEBSITE BRIEF — ${bizName}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+BUSINESS OVERVIEW
+Industry: ${industry}
+Target Audience: ${targetAudience}
+Primary Goal: ${goal}
+
+RECOMMENDED SITE STRUCTURE (5 Pages)
+1. Homepage — ${bizName} value proposition + CTA
+2. Services/Products — What you offer + pricing
+3. About — Your story + team
+4. Testimonials/Results — Social proof
+5. Contact/Book — Lead capture form + scheduling
+
+HOMEPAGE HEADLINE FORMULA
+"We help [${targetAudience}] [achieve specific outcome] without [main pain point]"
+
+KEY MESSAGES
+• Lead with the problem you solve
+• Show proof (testimonials, case studies, numbers)
+• Make the next step crystal clear
+• Build trust before asking for the sale
+
+RECOMMENDED PLATFORMS
+- Webflow — Best for custom design
+- Framer — Best for modern aesthetics
+- WordPress — Best for SEO & flexibility
+- Squarespace — Best for quick launch
+
+SEO PRIORITIES
+• Target 3–5 local/niche keywords
+• Optimize Google Business Profile
+• Add schema markup
+• Build 10+ quality backlinks
+
+TECH STACK RECOMMENDATION
+• Analytics: Google Analytics 4 (free)
+• Forms: Typeform or Google Forms
+• Scheduling: Calendly (free tier)
+• CRM Integration: HubSpot Free
+
+Next Step: Open the AI Chat and say "Help me write homepage copy for ${bizName}"`;
+
+  const output = document.getElementById('websiteBriefOutput');
+  if (output) {
+    output.style.display = 'block';
+    output.querySelector('.brief-content').textContent = brief;
+    output.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    showToast('Website brief generated!', 'success');
+  }
 }
 
-function finishGame() {
-  state.active = false;
-  window.clearInterval(timerId);
-  saveLeaderboard();
-  els.progressFill.style.width = "100%";
-  els.feedback.textContent = `Round complete! Final score: ${state.score.toLocaleString()} • Best streak: ${state.bestStreak}x`;
-  els.feedback.className = "feedback success";
-  els.lesson.textContent = "Replay with a harder level or switch modes to build true emoji fluency.";
-  els.answerInput.disabled = true;
-  els.speakBtn.disabled = true;
-  els.hintBtn.disabled = true;
-  els.skipBtn.disabled = true;
-  renderStats();
-  renderLeaderboard();
+// ── Document Generator ──────────────────────────────────────────────────────
+function initDocumentGenerator() {
+  const select = document.getElementById('docTemplateSelect');
+  if (select) {
+    select.innerHTML = `
+      <option value="">Select a document type...</option>
+      ${Object.entries(DOCUMENT_TEMPLATES).map(([id, t]) =>
+        `<option value="${id}">${t.title}</option>`
+      ).join('')}
+    `;
+    select.addEventListener('change', renderDocumentForm);
+  }
 }
 
-function saveLeaderboard() {
-  const board = loadJson(LEADERBOARD_KEY, []);
-  const entry = {
-    name: els.playerName.value.trim() || "Guest Oracle",
-    score: state.score,
-    streak: state.bestStreak,
-    date: new Date().toISOString()
-  };
-  const updated = [...board, entry]
-    .sort((a, b) => b.score - a.score || b.streak - a.streak || new Date(b.date) - new Date(a.date))
-    .slice(0, 8);
-  localStorage.setItem(LEADERBOARD_KEY, JSON.stringify(updated));
-}
+function renderDocumentForm() {
+  const templateId = document.getElementById('docTemplateSelect')?.value;
+  const formContainer = document.getElementById('docFormContainer');
+  if (!formContainer) return;
 
-function renderLeaderboard() {
-  const board = loadJson(LEADERBOARD_KEY, []);
-  const medals = ["🥇", "🥈", "🥉"];
-  els.leaderboard.innerHTML = board.length
-    ? board.map((entry, index) => `
-      <li>
-        <span class="rank">${medals[index] ?? `#${index + 1}`}</span>
-        <strong>${escapeHtml(entry.name)}</strong>
-        <span>${Number(entry.score).toLocaleString()} pts</span>
-        <small>${entry.streak}× streak</small>
-      </li>
-    `).join("")
-    : `<li class="empty">No scores yet — be the first! 🏆</li>`;
-}
-
-function escapeHtml(value) {
-  return value.replace(/[&<>'"]/g, (char) => ({
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    "'": "&#39;",
-    '"': "&quot;"
-  }[char]));
-}
-
-function submitAnswer(event) {
-  event.preventDefault();
-  if (!state.active) {
-    startGame();
+  if (!templateId) {
+    formContainer.innerHTML = '';
     return;
   }
 
-  const challenge = getCurrentChallenge();
-  const answer = els.answerInput.value.trim();
-  if (!answer) {
-    showToast("Add an answer first. Your best guess still teaches your brain.");
-    return;
-  }
+  const template = DOCUMENT_TEMPLATES[templateId];
+  if (!template) return;
 
-  const result = evaluateAnswer(answer, challenge);
-  if (result.isCorrect) {
-    markCorrect(challenge, result.confidence);
-  } else {
-    markIncorrect("Creative answer, but not close enough for this clue.");
-  }
-}
+  formContainer.innerHTML = `
+    <div class="doc-form-header">
+      <h4 class="doc-form-title">${template.title}</h4>
+      <p class="doc-form-desc">${template.description}</p>
+    </div>
+    <div class="doc-fields">
+      ${template.fields.map(f => `
+        <div class="form-group">
+          <label class="form-label">${f.label}</label>
+          <input type="text" class="form-input" name="${f.name}" placeholder="${f.placeholder}">
+        </div>
+      `).join('')}
+    </div>
+    <button class="btn primary" id="generateDocBtn" type="button">Generate Document →</button>
+  `;
 
-function showHint() {
-  if (!state.active) return;
-  const challenge = getCurrentChallenge();
-  if (!challenge) return;
-  state.usedHint = true;
-  els.lesson.textContent = `Hint: ${challenge.hint}`;
-  els.hintBtn.disabled = true;
-  showToast("Hint used: small point penalty, big learning boost.");
-}
-
-function skipChallenge() {
-  markIncorrect("Skipped. Study the lesson, then win the next prompt.");
-}
-
-function setupSpeech() {
-  if (!SpeechRecognition) {
-    els.speakBtn.disabled = true;
-    els.speakBtn.title = "Speech recognition is not supported in this browser.";
-    return;
-  }
-
-  recognition = new SpeechRecognition();
-  recognition.lang = "en-US";
-  recognition.interimResults = false;
-  recognition.maxAlternatives = 1;
-
-  recognition.addEventListener("start", () => {
-    isListening = true;
-    els.speakBtn.classList.add("listening");
-    els.speakBtn.textContent = "Listening…";
-  });
-  recognition.addEventListener("end", () => {
-    isListening = false;
-    els.speakBtn.classList.remove("listening");
-    els.speakBtn.textContent = "🎙 Speak";
-  });
-  recognition.addEventListener("result", (event) => {
-    const transcript = event.results[0][0].transcript;
-    els.answerInput.value = transcript;
-    showToast(`Heard: ${transcript}`);
-  });
-  recognition.addEventListener("error", () => {
-    isListening = false;
-    showToast("Speech did not connect. Typing works perfectly too.");
+  document.getElementById('generateDocBtn')?.addEventListener('click', () => {
+    const fields = {};
+    formContainer.querySelectorAll('input[name]').forEach(input => {
+      fields[input.name] = input.value.trim();
+    });
+    const content = generateDocument(templateId, fields);
+    if (content) {
+      const preview = document.getElementById('docPreview');
+      if (preview) {
+        preview.style.display = 'block';
+        preview.querySelector('.doc-preview-content').textContent = content;
+        preview.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+      document.getElementById('downloadDocBtn').onclick =
+        () => downloadDocument(content, `${templateId}-${Date.now()}.txt`);
+      showToast(`${template.title} generated!`, 'success');
+    }
   });
 }
 
-async function shareScore() {
-  const text = createShareText({ score: state.score, streak: state.bestStreak || state.streak, playerName: els.playerName.value });
-  if (navigator.share) {
-    await navigator.share({ title: "Emoji Oracle", text }).catch(() => undefined);
-  } else if (navigator.clipboard) {
-    await navigator.clipboard.writeText(text);
-    showToast("Share text copied to clipboard.");
-  } else {
-    showToast(text);
-  }
+// ── Pricing ─────────────────────────────────────────────────────────────────
+function initPricing() {
+  document.querySelectorAll('.pricing-cta').forEach(btn => {
+    btn.addEventListener('click', openWizard);
+  });
 }
 
-function resetLeaderboard() {
-  localStorage.removeItem(LEADERBOARD_KEY);
-  renderLeaderboard();
-  showToast("Leaderboard reset on this device.");
-}
+// ── Toast Notifications ─────────────────────────────────────────────────────
+export function showToast(message, type = 'info') {
+  const container = document.getElementById('toastContainer');
+  if (!container) return;
 
-function openDemo() {
-  els.demoModal.hidden = false;
-  els.demoVideo.play().catch(() => undefined);
-  document.addEventListener("keydown", handleDemoKey);
-}
+  const toast = document.createElement('div');
+  toast.className = `toast toast-${type}`;
+  const icons = { success: '✅', error: '❌', info: 'ℹ️', warning: '⚠️' };
+  toast.innerHTML = `<span class="toast-icon">${icons[type] || '💬'}</span><span>${message}</span>`;
+  container.appendChild(toast);
 
-function closeDemo() {
-  els.demoModal.hidden = true;
-  els.demoVideo.pause();
-  els.demoVideo.currentTime = 0;
-  document.removeEventListener("keydown", handleDemoKey);
+  setTimeout(() => toast.classList.add('visible'), 10);
+  setTimeout(() => {
+    toast.classList.remove('visible');
+    setTimeout(() => toast.remove(), 300);
+  }, 3500);
 }
-
-function handleDemoKey(event) {
-  if (event.key === "Escape") closeDemo();
-}
-
-function bindEvents() {
-  els.startBtn.addEventListener("click", startGame);
-  els.answerForm.addEventListener("submit", submitAnswer);
-  els.hintBtn.addEventListener("click", showHint);
-  els.skipBtn.addEventListener("click", skipChallenge);
-  els.shareBtn.addEventListener("click", shareScore);
-  els.resetBtn.addEventListener("click", resetLeaderboard);
-  els.speakBtn.addEventListener("click", () => { if (!isListening) recognition?.start(); });
-  els.demoBtn.addEventListener("click", openDemo);
-  els.demoCloseBtn.addEventListener("click", closeDemo);
-  els.demoModalBackdrop.addEventListener("click", closeDemo);
-  [els.playerName, els.modeSelect, els.levelSelect].forEach((el) => el.addEventListener("change", saveState));
-}
-
-restorePreferences();
-setupSpeech();
-bindEvents();
-renderLeaderboard();
-renderStats();

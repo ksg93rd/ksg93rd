@@ -3,149 +3,490 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Emoji Oracle — the ultimate emoji translation game. Decode emoji messages, speak your answers, and climb the leaderboard." />
-    <title>Emoji Oracle — Play. Decode. Win.</title>
+    <meta name="description" content="Kismoe Business Services AI — Your AI-Powered Business Operating System. Launch, manage, automate, protect, and grow your business." />
+    <title>Kismoe — AI-Powered Business Operating System</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@600;700;800;900&family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div class="bg-orbs" aria-hidden="true"></div>
 
-    <main class="app-shell">
+    <!-- Background gradient layer -->
+    <div class="bg-gradient" aria-hidden="true"></div>
 
-      <!-- ── Hero ─────────────────────────────────────────────────── -->
-      <section class="hero" aria-labelledby="gameTitle">
-        <div class="hero-copy">
-          <p class="eyebrow">🏆 Play &nbsp;·&nbsp; Decode &nbsp;·&nbsp; Win</p>
-          <h1 id="gameTitle">Emoji<br>Oracle</h1>
-          <p class="hero-text">The ultimate emoji translation game. Decode clues, speak your answers, chain streaks, and own the leaderboard.</p>
-          <div class="hero-actions">
-            <button id="startBtn" class="btn primary" type="button">▶ Play Now</button>
-            <button id="demoBtn" class="btn demo-btn" type="button">🎬 How to play</button>
-            <button id="shareBtn" class="btn ghost" type="button" disabled>Share score</button>
+    <!-- ── Navigation ─────────────────────────────────────────────── -->
+    <nav id="mainNav" aria-label="Main navigation">
+      <div class="container">
+        <div class="nav-inner">
+          <a href="#" class="nav-logo">Kismoe <span>Business AI</span></a>
+
+          <button id="navToggle" class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+            <span></span><span></span><span></span>
+          </button>
+
+          <ul id="navMenu" class="nav-menu" role="list">
+            <li><a href="#services">Services</a></li>
+            <li><a href="#healthSection">Health Score</a></li>
+            <li><a href="#documents">Documents</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+          </ul>
+
+          <div class="nav-cta">
+            <button id="startJourneyBtn" class="btn primary">Start Free →</button>
           </div>
         </div>
-        <div class="hero-orb" aria-hidden="true">
-          <span>😄</span><span>💬</span><span>🚀</span><span>🧠</span>
+      </div>
+    </nav>
+
+    <!-- ── Hero ───────────────────────────────────────────────────── -->
+    <section class="hero-section" id="home" aria-labelledby="heroTitle">
+      <div class="container">
+        <div class="hero-content">
+          <div class="hero-copy">
+            <div class="hero-eyebrow">✨ AI-Powered Business Platform</div>
+            <h1 id="heroTitle" class="hero-title">
+              Kismoe<br>
+              <span class="gradient-text">Business Services</span>
+            </h1>
+            <p class="hero-tagline">Your AI-Powered Business Operating System</p>
+            <p class="hero-subline">Launch. Manage. Automate. Protect. Grow. Scale.</p>
+            <div class="hero-actions">
+              <button id="heroStartBtn" class="btn primary btn-large">🚀 Start My Business Journey</button>
+              <button id="heroExploreBtn" class="btn secondary">Explore Services</button>
+              <button id="heroChatBtn" class="btn ghost">💬 Ask the AI</button>
+            </div>
+            <div class="hero-stats">
+              <div class="hero-stat">
+                <span class="hero-stat-value">8</span>
+                <span class="hero-stat-label">Service Pillars</span>
+              </div>
+              <div class="hero-stat">
+                <span class="hero-stat-value">50+</span>
+                <span class="hero-stat-label">AI Deliverables</span>
+              </div>
+              <div class="hero-stat">
+                <span class="hero-stat-value">8</span>
+                <span class="hero-stat-label">Doc Templates</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-visual" aria-hidden="true">
+            <div class="hero-card featured">
+              <div class="hero-card-icon">📊</div>
+              <div class="hero-card-title">Business Health Score</div>
+              <div class="hero-card-desc">Get a 9-dimension health score with actionable roadmap</div>
+            </div>
+            <div class="hero-card">
+              <div class="hero-card-icon">🤖</div>
+              <div class="hero-card-title">AI Advisor</div>
+              <div class="hero-card-desc">24/7 business guidance</div>
+            </div>
+            <div class="hero-card">
+              <div class="hero-card-icon">📄</div>
+              <div class="hero-card-title">Doc Generator</div>
+              <div class="hero-card-desc">8 legal templates ready</div>
+            </div>
+            <div class="hero-card">
+              <div class="hero-card-icon">⚡</div>
+              <div class="hero-card-title">Automation Map</div>
+              <div class="hero-card-desc">Save 20+ hours/week</div>
+            </div>
+            <div class="hero-card">
+              <div class="hero-card-icon">🌐</div>
+              <div class="hero-card-title">Website Builder</div>
+              <div class="hero-card-desc">Generate your site brief</div>
+            </div>
+          </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- ── Setup ─────────────────────────────────────────────────── -->
-      <section class="control-panel" aria-label="Game setup">
-        <label>
-          <span class="label-text">👤 Player name</span>
-          <input id="playerName" maxlength="24" autocomplete="nickname" placeholder="Guest Oracle" />
-        </label>
-        <label>
-          <span class="label-text">🎮 Game mode</span>
-          <select id="modeSelect">
-            <option value="mixed">Mixed mastery</option>
-            <option value="emoji-to-text">Emoji → Message</option>
-            <option value="text-to-emoji">Message → Emoji</option>
-          </select>
-        </label>
-        <label>
-          <span class="label-text">⚡ Difficulty</span>
-          <select id="levelSelect">
-            <option value="all">All levels</option>
-            <option value="rookie">🌱 Rookie</option>
-            <option value="spark">⚡ Spark</option>
-            <option value="pro">🚀 Pro</option>
-          </select>
-        </label>
-      </section>
-
-      <!-- ── Game grid ─────────────────────────────────────────────── -->
-      <section class="game-grid">
-
-        <article id="promptCard" class="prompt-card is-idle" aria-live="polite">
-          <div class="card-topline">
-            <span id="levelBadge" class="badge">🌈 Ready</span>
-            <span id="modeBadge" class="badge subtle">Mixed</span>
-          </div>
-          <p id="promptLabel" class="prompt-label">Press Play to receive your first clue</p>
-          <div id="promptValue" class="prompt-value">🧩✨</div>
-          <form id="answerForm" class="answer-form">
-            <label class="sr-only" for="answerInput">Your answer</label>
-            <input id="answerInput" placeholder="Type your translation…" disabled />
-            <button class="btn primary submit-btn" type="submit">Submit</button>
-          </form>
-          <div class="tool-row">
-            <button id="speakBtn" class="btn tool" type="button" disabled>🎙 Speak</button>
-            <button id="hintBtn" class="btn tool" type="button" disabled>💡 Hint</button>
-            <button id="skipBtn" class="btn tool" type="button" disabled>⏭ Skip</button>
-          </div>
-          <p id="feedback" class="feedback neutral">Choose a mode and hit Play when you are ready.</p>
-          <p id="lesson" class="lesson">Built for beginners, creators, classrooms, families, and emoji pros.</p>
-        </article>
-
-        <aside class="score-panel" aria-label="Score and leaderboard">
-          <div class="stats">
-            <div class="stat-box stat-score">
-              <span id="score">0</span>
-              <small>Score</small>
-            </div>
-            <div class="stat-box stat-streak">
-              <span id="streak">0×</span>
-              <small>Streak</small>
-            </div>
-            <div class="stat-box stat-timer">
-              <span id="timer">40</span>
-              <small>Secs</small>
-            </div>
-          </div>
-          <div id="progress" class="progress" role="progressbar" aria-label="Round progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-            <span id="progressFill"></span>
-          </div>
-          <p id="challengeCount" class="challenge-count">1 / 10</p>
-          <div class="leaderboard-header">
-            <h2>🏆 Leaderboard</h2>
-            <button id="resetBtn" class="link-button" type="button">Reset</button>
-          </div>
-          <ol id="leaderboard" class="leaderboard"></ol>
-        </aside>
-      </section>
-
-      <!-- ── Feature badges ────────────────────────────────────────── -->
-      <section class="features" aria-label="Game features">
-        <article>
-          <span class="feature-icon">🎙</span>
-          <strong>Speak or type</strong>
-          <span>Use voice recognition or keyboard — both count toward your streak.</span>
-        </article>
-        <article>
-          <span class="feature-icon">⚡</span>
-          <strong>Speed bonuses</strong>
-          <span>The faster you answer, the more points you earn. Every second counts.</span>
-        </article>
-        <article>
-          <span class="feature-icon">🏆</span>
-          <strong>Leaderboard glory</strong>
-          <span>Top scores saved locally. Share your result and challenge anyone.</span>
-        </article>
-      </section>
-
-    </main>
-
-    <div id="toast" class="toast" role="status" aria-live="polite"></div>
-
-    <!-- Demo video modal -->
-    <div id="demoModal" class="demo-modal" role="dialog" aria-modal="true" aria-label="How to play Emoji Oracle" hidden>
-      <div class="demo-modal-backdrop"></div>
-      <div class="demo-modal-box">
-        <div class="demo-modal-header">
-          <h2>How to play</h2>
-          <button id="demoCloseBtn" class="demo-close-btn" type="button" aria-label="Close demo video">✕</button>
-        </div>
-        <video id="demoVideo" class="demo-video" controls preload="metadata" playsinline>
-          <source src="docs/demo.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
+    <!-- ── Feature Highlights Row ─────────────────────────────────── -->
+    <div class="features-row">
+      <div class="container">
+        <ul class="features-list" role="list">
+          <li class="feature-item"><span class="feature-icon">🏛️</span> Business Formation</li>
+          <li class="feature-item"><span class="feature-icon">⚖️</span> Legal Documents</li>
+          <li class="feature-item"><span class="feature-icon">💰</span> Finance &amp; Accounting</li>
+          <li class="feature-item"><span class="feature-icon">👥</span> HR &amp; Hiring</li>
+          <li class="feature-item"><span class="feature-icon">📣</span> Marketing &amp; Brand</li>
+          <li class="feature-item"><span class="feature-icon">⚡</span> Business Automation</li>
+          <li class="feature-item"><span class="feature-icon">🔒</span> Cybersecurity</li>
+          <li class="feature-item"><span class="feature-icon">🌐</span> Website &amp; Digital</li>
+        </ul>
       </div>
     </div>
 
+    <!-- ── Services ───────────────────────────────────────────────── -->
+    <section id="services" class="services-section">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-label">Services</p>
+          <h2 class="section-title">8 Pillars of Business Success</h2>
+          <p class="section-subtitle">Everything your business needs — from legal foundation to growth strategy — powered by AI.</p>
+        </div>
+        <div id="servicesGrid" class="services-grid">
+          <!-- Rendered by app.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Health Score Dashboard (hidden until onboarding complete) ── -->
+    <section id="healthSection" aria-labelledby="healthTitle">
+      <div class="container">
+        <div class="section-header health-header">
+          <p class="section-label">Your Dashboard</p>
+          <h2 id="healthTitle" class="section-title">Business Health Score — <span id="dashboardBusinessName">Your Business</span></h2>
+          <p class="section-subtitle">A comprehensive assessment of your business across 9 critical dimensions.</p>
+        </div>
+
+        <div class="health-grid glass-card" style="padding: 2.5rem;">
+          <div class="overall-score-wrapper">
+            <div class="score-ring-container">
+              <svg class="score-ring-svg" viewBox="0 0 120 120" aria-hidden="true">
+                <circle class="score-ring-bg" cx="60" cy="60" r="54"/>
+                <circle id="overallScoreRing" cx="60" cy="60" r="54"/>
+              </svg>
+              <div class="score-ring-label">
+                <span id="overallScoreText">—</span>
+                <span class="score-ring-sublabel">/100</span>
+              </div>
+            </div>
+            <p class="overall-score-name">Overall Health</p>
+          </div>
+
+          <div id="dimensionScores">
+            <!-- Rendered by onboarding.js -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Priority Roadmap ───────────────────────────────────────── -->
+    <section class="roadmap-section" id="roadmap" style="display:none;">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-label">Your Roadmap</p>
+          <h2 class="section-title">Priority Action Plan</h2>
+          <p class="section-subtitle">Based on your health score, here are your highest-impact next steps.</p>
+        </div>
+        <div id="roadmapContainer">
+          <!-- Rendered by onboarding.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Website Builder ────────────────────────────────────────── -->
+    <section id="websiteBuilder" class="website-builder-section">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-label">Website Builder</p>
+          <h2 class="section-title">Generate Your Website Brief</h2>
+          <p class="section-subtitle">Answer 4 questions and get a complete website blueprint in seconds.</p>
+        </div>
+        <div class="builder-grid">
+          <div class="builder-form-wrapper">
+            <h3>Build Your Website Brief</h3>
+            <form id="websiteBuilderForm" novalidate>
+              <div class="form-group">
+                <label for="wb-bizName" class="form-label">Business Name</label>
+                <input type="text" id="wb-bizName" class="form-input" placeholder="e.g. Acme Solutions" required>
+              </div>
+              <div class="form-group">
+                <label for="wb-industry" class="form-label">Industry</label>
+                <input type="text" id="wb-industry" class="form-input" placeholder="e.g. Professional Services, E-Commerce, Healthcare">
+              </div>
+              <div class="form-group">
+                <label for="wb-audience" class="form-label">Target Audience</label>
+                <input type="text" id="wb-audience" class="form-input" placeholder="e.g. Small business owners in Texas">
+              </div>
+              <div class="form-group">
+                <label for="wb-goal" class="form-label">Primary Goal</label>
+                <input type="text" id="wb-goal" class="form-input" placeholder="e.g. Generate leads, sell products online, book appointments">
+              </div>
+              <button type="submit" class="btn primary" style="margin-top: 1rem; width: 100%; justify-content: center;">
+                Generate Website Brief →
+              </button>
+            </form>
+            <div id="websiteBriefOutput">
+              <div class="brief-content"></div>
+            </div>
+          </div>
+
+          <div class="builder-info">
+            <h3>Your 24/7 Digital Salesperson</h3>
+            <p>A great website is your most powerful business asset. Our AI helps you plan the perfect site before you build it — saving time and money.</p>
+            <div class="builder-benefits">
+              <div class="builder-benefit"><span>✅</span> 5-page site structure</div>
+              <div class="builder-benefit"><span>✅</span> Homepage copy formula</div>
+              <div class="builder-benefit"><span>✅</span> Platform recommendations</div>
+              <div class="builder-benefit"><span>✅</span> SEO priorities</div>
+              <div class="builder-benefit"><span>✅</span> Tech stack guide</div>
+              <div class="builder-benefit"><span>✅</span> Conversion optimization tips</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Document Generator ─────────────────────────────────────── -->
+    <section id="documents" class="documents-section">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-label">Document Generator</p>
+          <h2 class="section-title">Legal &amp; Business Templates</h2>
+          <p class="section-subtitle">Generate customized legal and business documents in minutes. 8 essential templates.</p>
+        </div>
+
+        <div class="doc-selector-row">
+          <select id="docTemplateSelect" class="form-input form-select" aria-label="Select document template">
+            <!-- Populated by app.js -->
+          </select>
+        </div>
+
+        <div id="docFormContainer">
+          <p style="color: var(--text-muted); text-align: center; padding: 2rem;">Select a document type above to get started.</p>
+        </div>
+
+        <div id="docPreview">
+          <div class="doc-preview-header">
+            <h4>Document Preview</h4>
+            <button id="downloadDocBtn" class="btn primary">⬇ Download .txt</button>
+          </div>
+          <div class="doc-preview-content"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Pricing ────────────────────────────────────────────────── -->
+    <section id="pricing" class="pricing-section">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-label">Pricing</p>
+          <h2 class="section-title">Simple, Transparent Pricing</h2>
+          <p class="section-subtitle">Start free. Upgrade as you grow. Cancel anytime.</p>
+        </div>
+
+        <div class="pricing-grid">
+          <!-- Starter -->
+          <div class="pricing-card">
+            <div class="pricing-tier">Starter</div>
+            <div class="pricing-desc">For solopreneurs and idea-stage founders</div>
+            <div class="pricing-price">
+              <span class="pricing-amount">Free</span>
+            </div>
+            <ul class="pricing-features">
+              <li class="pricing-feature"><span class="check">✓</span> Business health score</li>
+              <li class="pricing-feature"><span class="check">✓</span> AI chat advisor (10/mo)</li>
+              <li class="pricing-feature"><span class="check">✓</span> 2 document templates</li>
+              <li class="pricing-feature"><span class="check">✓</span> Website brief generator</li>
+              <li class="pricing-feature"><span class="dash">—</span> Priority roadmap</li>
+              <li class="pricing-feature"><span class="dash">—</span> Expert review</li>
+            </ul>
+            <button class="btn secondary pricing-cta">Get Started Free</button>
+          </div>
+
+          <!-- Growth -->
+          <div class="pricing-card featured">
+            <div class="pricing-popular">Most Popular</div>
+            <div class="pricing-tier">Growth</div>
+            <div class="pricing-desc">For growing businesses ready to scale</div>
+            <div class="pricing-price">
+              <span class="pricing-amount">$97</span>
+              <span class="pricing-period">/month</span>
+            </div>
+            <ul class="pricing-features">
+              <li class="pricing-feature"><span class="check">✓</span> Everything in Starter</li>
+              <li class="pricing-feature"><span class="check">✓</span> Unlimited AI chat</li>
+              <li class="pricing-feature"><span class="check">✓</span> All 8 document templates</li>
+              <li class="pricing-feature"><span class="check">✓</span> Priority roadmap</li>
+              <li class="pricing-feature"><span class="check">✓</span> All 8 service modules</li>
+              <li class="pricing-feature"><span class="check">✓</span> 1 expert review/mo</li>
+            </ul>
+            <button class="btn primary pricing-cta">Start Growth Plan</button>
+          </div>
+
+          <!-- Professional -->
+          <div class="pricing-card">
+            <div class="pricing-tier">Professional</div>
+            <div class="pricing-desc">For established businesses with a team</div>
+            <div class="pricing-price">
+              <span class="pricing-amount">$247</span>
+              <span class="pricing-period">/month</span>
+            </div>
+            <ul class="pricing-features">
+              <li class="pricing-feature"><span class="check">✓</span> Everything in Growth</li>
+              <li class="pricing-feature"><span class="check">✓</span> Done-for-you services</li>
+              <li class="pricing-feature"><span class="check">✓</span> 3 expert reviews/mo</li>
+              <li class="pricing-feature"><span class="check">✓</span> Team access (5 seats)</li>
+              <li class="pricing-feature"><span class="check">✓</span> Automation setup</li>
+              <li class="pricing-feature"><span class="check">✓</span> Priority support</li>
+            </ul>
+            <button class="btn secondary pricing-cta">Start Professional</button>
+          </div>
+
+          <!-- Scale -->
+          <div class="pricing-card">
+            <div class="pricing-tier">Scale</div>
+            <div class="pricing-desc">For businesses ready to grow aggressively</div>
+            <div class="pricing-price">
+              <span class="pricing-amount">$497</span>
+              <span class="pricing-period">/month</span>
+            </div>
+            <ul class="pricing-features">
+              <li class="pricing-feature"><span class="check">✓</span> Everything in Professional</li>
+              <li class="pricing-feature"><span class="check">✓</span> Unlimited expert reviews</li>
+              <li class="pricing-feature"><span class="check">✓</span> Unlimited team seats</li>
+              <li class="pricing-feature"><span class="check">✓</span> White-glove onboarding</li>
+              <li class="pricing-feature"><span class="check">✓</span> Dedicated advisor</li>
+              <li class="pricing-feature"><span class="check">✓</span> Quarterly strategy session</li>
+            </ul>
+            <button class="btn secondary pricing-cta">Start Scale Plan</button>
+          </div>
+        </div>
+
+        <div class="pricing-enterprise glass-card">
+          <h3>Enterprise &amp; Custom Solutions</h3>
+          <p>Need a custom plan for your organization? We offer white-label solutions, API access, and dedicated support for larger teams.</p>
+          <button class="btn primary pricing-cta">Contact Sales →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── CTA Section ─────────────────────────────────────────────── -->
+    <section class="cta-section">
+      <div class="container">
+        <div class="cta-card">
+          <h2>Ready to Transform Your Business?</h2>
+          <p>Join thousands of entrepreneurs who use Kismoe to launch, grow, and protect their businesses with AI.</p>
+          <div class="cta-actions">
+            <button id="ctaStartBtn" class="btn primary btn-large">🚀 Start My Free Journey</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Footer ──────────────────────────────────────────────────── -->
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-logo">Kismoe Business AI</div>
+        <p>Your AI-Powered Business Operating System</p>
+        <nav class="footer-links" aria-label="Footer navigation">
+          <a href="#services">Services</a>
+          <a href="#documents">Documents</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#websiteBuilder">Website Builder</a>
+        </nav>
+        <p style="margin-top: 1.5rem; font-size: 0.78rem;">
+          &copy; 2025 Kismoe Business Services. All information provided is for educational purposes only.
+          Always consult qualified professionals for legal, financial, HR, and cybersecurity advice.
+        </p>
+      </div>
+    </footer>
+
+    <!-- ── Onboarding Wizard Modal ─────────────────────────────────── -->
+    <div id="onboardingOverlay" class="wizard-overlay" role="dialog" aria-modal="true" aria-labelledby="wizardTitle">
+      <div class="wizard-modal">
+        <div id="wizardContent">
+          <!-- Rendered by onboarding.js -->
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Service Detail Slide-in Panel ──────────────────────────── -->
+    <div id="panelOverlay" class="panel-overlay" aria-hidden="true"></div>
+    <aside id="servicePanel" class="service-panel" role="complementary" aria-label="Service details">
+      <div class="panel-header">
+        <div class="panel-header-info">
+          <div id="panelIcon" class="panel-icon" aria-hidden="true">🏛️</div>
+          <h2 id="panelTitle" class="panel-title">Service Title</h2>
+          <p id="panelTagline" class="panel-tagline">Tagline</p>
+        </div>
+        <button id="panelClose" class="panel-close" aria-label="Close panel">&times;</button>
+      </div>
+      <div class="panel-body">
+        <div class="panel-section">
+          <p class="panel-section-title">Who is this for?</p>
+          <p id="panelForWho" class="panel-for-who"></p>
+        </div>
+        <div class="panel-section">
+          <p class="panel-section-title">What's included</p>
+          <ul id="panelIncludes" class="panel-list"></ul>
+        </div>
+        <div class="panel-section">
+          <p class="panel-section-title">AI Deliverables</p>
+          <ul id="panelDeliverables" class="panel-list"></ul>
+        </div>
+        <div class="panel-actions">
+          <button id="panelChatBtn" class="btn primary">🤖 Generate Now with AI</button>
+          <button class="btn ghost" onclick="document.getElementById('startJourneyBtn').click()">📊 Get My Health Score</button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ── Floating Chat Widget ────────────────────────────────────── -->
+    <div id="chatWidget" class="chat-widget" aria-label="AI Business Advisor chat">
+      <button id="chatToggle" class="chat-toggle" aria-label="Open AI chat assistant" aria-expanded="false">
+        💬
+        <span class="chat-badge" aria-label="AI online">AI</span>
+      </button>
+      <div class="chat-window" role="dialog" aria-modal="false" aria-label="AI Business Advisor">
+        <div class="chat-header">
+          <div class="chat-header-info">
+            <div class="chat-avatar" aria-hidden="true">🤖</div>
+            <div>
+              <div class="chat-name">Kismoe AI Advisor</div>
+              <div class="chat-status">&#9679; Online — Demo Mode</div>
+            </div>
+          </div>
+          <div class="chat-header-actions">
+            <button id="chatClear" class="chat-action-btn" title="Clear chat" aria-label="Clear conversation">🗑</button>
+            <button id="chatClose" class="chat-action-btn" title="Close chat" aria-label="Close chat">&#x2715;</button>
+          </div>
+        </div>
+        <div id="chatMessages" aria-live="polite" aria-label="Chat messages">
+          <!-- Rendered by chat.js -->
+        </div>
+        <div class="chat-input-area">
+          <input
+            type="text"
+            id="chatInput"
+            placeholder="Ask anything about your business..."
+            aria-label="Chat message input"
+            autocomplete="off"
+          />
+          <button id="chatSend" aria-label="Send message">&#10140;</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Toast Container ─────────────────────────────────────────── -->
+    <div id="toastContainer" aria-live="polite" aria-label="Notifications"></div>
+
+    <!-- ── Show roadmap when health section is revealed ───────────── -->
+    <script>
+      (function() {
+        var checked = false;
+        function syncRoadmap() {
+          var h = document.getElementById('healthSection');
+          var r = document.getElementById('roadmap');
+          if (h && r) {
+            r.style.display = h.style.display;
+          }
+        }
+        document.addEventListener('DOMContentLoaded', function() {
+          var health = document.getElementById('healthSection');
+          if (!health) return;
+          var orig = Object.getOwnPropertyDescriptor(CSSStyleDeclaration.prototype, 'display');
+          // Use a simple polling fallback for cross-browser style observation
+          setInterval(syncRoadmap, 500);
+        });
+      })();
+    </script>
+
+    <!-- ── Main App ────────────────────────────────────────────────── -->
     <script type="module" src="src/app.js"></script>
   </body>
 </html>
