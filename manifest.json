@@ -1,0 +1,12 @@
+{
+  "name": "Kismoe Business Services",
+  "short_name": "Kismoe",
+  "description": "AI-Powered Business Operating System",
+  "start_url": "/ksg93rd/",
+  "display": "standalone",
+  "background_color": "#0a0f1e",
+  "theme_color": "#3b82f6",
+  "icons": [
+    { "src": "favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

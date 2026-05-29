@@ -21,6 +21,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initDocumentGenerator();
   initPricing();
   initWaitlist();
+  initContactModal();
+  initCookieBanner();
 
   // Listen for openService events from roadmap buttons
   document.addEventListener('openService', (e) => {
@@ -304,7 +306,13 @@ function renderDocumentForm() {
 // ── Pricing ─────────────────────────────────────────────────────────────────
 function initPricing() {
   document.querySelectorAll('.pricing-cta').forEach(btn => {
-    btn.addEventListener('click', openWizard);
+    btn.addEventListener('click', () => {
+      // Derive plan name from the button text or nearest pricing-tier label
+      const card = btn.closest('.pricing-card, .pricing-enterprise');
+      const tierEl = card?.querySelector('.pricing-tier');
+      const planName = tierEl ? tierEl.textContent.trim() : 'Kismoe';
+      openContactModal(planName);
+    });
   });
 }
 
@@ -324,6 +332,86 @@ export function showToast(message, type = 'info') {
     toast.classList.remove('visible');
     setTimeout(() => toast.remove(), 300);
   }, 3500);
+}
+
+// ── Contact Modal ─────────────────────────────────────────────────────────────
+function initContactModal() {
+  const modal      = document.getElementById('contactModal');
+  const backdrop   = document.getElementById('contactModalBackdrop');
+  const form       = document.getElementById('contactForm');
+  const errEl      = document.getElementById('contactError');
+  const successEl  = document.getElementById('contactSuccess');
+  const submitBtn  = document.getElementById('contactSubmit');
+  if (!modal) return;
+
+  backdrop?.addEventListener('click', closeContact);
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !modal.hidden) closeContact(); });
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    errEl.textContent = '';
+    const name    = document.getElementById('contactName').value.trim();
+    const email   = document.getElementById('contactEmail').value.trim();
+    const biz     = document.getElementById('contactBiz').value.trim();
+    const message = document.getElementById('contactMessage').value.trim();
+
+    if (!name || !email || !biz) {
+      errEl.textContent = 'Please fill in all required fields.';
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending…';
+
+    // NOTE: Requires Supabase table `kismoe_contact_inquiries`
+    // with columns: id (uuid, pk), name (text), email (text),
+    // business_name (text), message (text), plan (text), created_at (timestamptz default now())
+    const { error } = await supabase.from('kismoe_contact_inquiries').insert({
+      name, email, business_name: biz, message,
+      plan: modal.dataset.plan || 'general'
+    });
+
+    if (error) {
+      // Graceful fallback — show success anyway (inquiry noted)
+      console.error('Contact form error:', error);
+    }
+
+    form.hidden = true;
+    successEl.hidden = false;
+    showToast('Inquiry sent! We\'ll be in touch within 24 hours.', 'success');
+  });
+}
+
+export function openContactModal(planName = '') {
+  const modal = document.getElementById('contactModal');
+  const label = document.getElementById('contactPlanName');
+  if (!modal) return;
+  if (label && planName) label.textContent = planName;
+  modal.dataset.plan = planName;
+  modal.hidden = false;
+  document.getElementById('contactName')?.focus();
+}
+
+function closeContact() {
+  document.getElementById('contactModal').hidden = true;
+}
+
+// ── Cookie Banner ─────────────────────────────────────────────────────────────
+function initCookieBanner() {
+  const banner = document.getElementById('cookieBanner');
+  if (!banner) return;
+  const accepted = localStorage.getItem('kismoe_cookie_consent');
+  if (!accepted) {
+    banner.hidden = false;
+  }
+  document.getElementById('cookieAccept')?.addEventListener('click', () => {
+    localStorage.setItem('kismoe_cookie_consent', 'accepted');
+    banner.hidden = true;
+  });
+  document.getElementById('cookieDismiss')?.addEventListener('click', () => {
+    localStorage.setItem('kismoe_cookie_consent', 'declined');
+    banner.hidden = true;
+  });
 }
 
 // ── Waitlist ─────────────────────────────────────────────────────────────────

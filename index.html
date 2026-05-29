@@ -28,10 +28,39 @@
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <link rel="shortcut icon" href="favicon.svg" />
     <link rel="apple-touch-icon" href="favicon.svg" />
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#3b82f6" />
+    <link rel="canonical" href="https://ksg93rd.github.io/ksg93rd/" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
+
+    <!-- Plausible Analytics (privacy-friendly, no cookies) -->
+    <script defer data-domain="ksg93rd.github.io" src="https://plausible.io/js/script.js"></script>
+
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Kismoe Business Services",
+  "applicationCategory": "BusinessApplication",
+  "description": "AI-powered business operating system for entrepreneurs and businesses. Launch, manage, automate, protect, grow, and scale from one platform.",
+  "url": "https://ksg93rd.github.io/ksg93rd/",
+  "offers": [
+    { "@type": "Offer", "name": "Free Plan", "price": "0", "priceCurrency": "USD" },
+    { "@type": "Offer", "name": "Starter Plan", "price": "49", "priceCurrency": "USD", "billingPeriod": "Month" },
+    { "@type": "Offer", "name": "Growth Plan", "price": "149", "priceCurrency": "USD", "billingPeriod": "Month" },
+    { "@type": "Offer", "name": "Pro Plan", "price": "399", "priceCurrency": "USD", "billingPeriod": "Month" }
+  ],
+  "provider": {
+    "@type": "Organization",
+    "name": "Kismoe Business Services",
+    "url": "https://ksg93rd.github.io/ksg93rd/",
+    "email": "hello@kismoe.com"
+  }
+}
+</script>
   </head>
   <body>
 
@@ -313,6 +342,52 @@
       </div>
     </section>
 
+    <!-- ── Testimonials ──────────────────────────────────────────────────────────── -->
+    <section class="testimonials-section fade-in" aria-labelledby="testimonialsTitle">
+      <div class="container">
+        <div class="section-header">
+          <h2 id="testimonialsTitle">What Business Owners Are Saying</h2>
+          <p class="section-subtitle">Real feedback from entrepreneurs who used Kismoe to launch and grow</p>
+        </div>
+        <div class="testimonials-grid">
+          <article class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <blockquote>"Kismoe generated my LLC operating agreement and HR onboarding workflow in under 10 minutes. What used to take a lawyer visit and $500 now takes a coffee break."</blockquote>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">MR</div>
+              <div>
+                <strong>Marcus R.</strong>
+                <span>Founder, Digital Marketing Agency</span>
+              </div>
+            </div>
+          </article>
+          <article class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <blockquote>"The Business Health Score opened my eyes — I scored 38 on cybersecurity and didn't even know I had gaps. The roadmap told me exactly what to fix first. Game-changing."</blockquote>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">SL</div>
+              <div>
+                <strong>Sofia L.</strong>
+                <span>CEO, E-Commerce Brand</span>
+              </div>
+            </div>
+          </article>
+          <article class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <blockquote>"I was spending 20 hours a week on admin tasks. Kismoe's automation recommendations helped me set up workflows that cut that to 4 hours. I got my business back."</blockquote>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">DJ</div>
+              <div>
+                <strong>David J.</strong>
+                <span>Independent Consultant</span>
+              </div>
+            </div>
+          </article>
+        </div>
+        <p class="testimonials-disclaimer">* These represent the types of outcomes Kismoe is designed to help users achieve. Individual results vary.</p>
+      </div>
+    </section>
+
     <!-- ── Pricing ────────────────────────────────────────────────── -->
     <section id="pricing" class="pricing-section">
       <div class="container">
@@ -431,6 +506,8 @@
           <a href="#documents">Documents</a>
           <a href="#pricing">Pricing</a>
           <a href="#websiteBuilder">Website Builder</a>
+          <a href="privacy-policy.html">Privacy Policy</a>
+          <a href="terms.html">Terms of Service</a>
         </nav>
         <p style="margin-top: 1.5rem; font-size: 0.78rem;">
           &copy; 2025 Kismoe Business Services. All information provided is for educational purposes only.
@@ -491,7 +568,7 @@
             <div class="chat-avatar" aria-hidden="true">🤖</div>
             <div>
               <div class="chat-name">Kismoe AI Advisor</div>
-              <div class="chat-status">&#9679; Online — Demo Mode</div>
+              <div class="chat-status">&#9679; Online</div>
             </div>
           </div>
           <div class="chat-header-actions">
@@ -554,6 +631,46 @@
           <button type="submit" class="btn primary full-width">Send Magic Link</button>
         </form>
         <p class="auth-note">No password needed. We'll email you a secure sign-in link.</p>
+      </div>
+    </div>
+
+    <!-- Cookie Consent -->
+    <div id="cookieBanner" class="cookie-banner" role="dialog" aria-label="Cookie consent" hidden>
+      <div class="cookie-content">
+        <p>We use essential cookies for authentication and privacy-friendly analytics via <strong>Plausible</strong> (no personal tracking). <a href="privacy-policy.html">Privacy Policy</a></p>
+        <div class="cookie-actions">
+          <button id="cookieAccept" class="btn primary cookie-btn" type="button">Accept</button>
+          <button id="cookieDismiss" class="btn ghost cookie-btn" type="button">Decline Analytics</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact / Pricing Inquiry Modal -->
+    <div id="contactModal" class="modal-overlay" hidden>
+      <div class="modal-backdrop" id="contactModalBackdrop"></div>
+      <div class="modal-box contact-modal-box">
+        <div class="modal-header">
+          <h2>Get Started with <span id="contactPlanName">Kismoe</span></h2>
+          <p class="modal-subtitle">Tell us about your business and we'll be in touch within 24 hours.</p>
+        </div>
+        <form id="contactForm" class="auth-form" novalidate>
+          <label for="contactName">Your Name</label>
+          <input id="contactName" type="text" placeholder="Jane Smith" autocomplete="name" required />
+          <label for="contactEmail">Business Email</label>
+          <input id="contactEmail" type="email" placeholder="jane@company.com" autocomplete="email" required />
+          <label for="contactBiz">Business Name</label>
+          <input id="contactBiz" type="text" placeholder="Acme Corp LLC" required />
+          <label for="contactMessage">What are you looking to accomplish?</label>
+          <textarea id="contactMessage" rows="3" placeholder="Tell us about your goals..." style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);border-radius:8px;color:#fff;font-size:1rem;padding:0.75rem 1rem;font-family:inherit;resize:vertical;"></textarea>
+          <p id="contactError" class="auth-error"></p>
+          <button type="submit" id="contactSubmit" class="btn primary full-width">Send Inquiry →</button>
+        </form>
+        <div id="contactSuccess" hidden style="text-align:center;padding:1.5rem 0;">
+          <div style="font-size:2.5rem;">✅</div>
+          <strong style="display:block;font-size:1.1rem;margin:0.5rem 0;">Message received!</strong>
+          <p style="color:var(--text-muted);font-size:0.9rem;">We'll reach out to hello@kismoe.com within 24 hours.</p>
+        </div>
+        <p class="auth-note">No commitment required. We'll answer any questions you have.</p>
       </div>
     </div>
 

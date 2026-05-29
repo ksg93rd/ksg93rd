@@ -9,7 +9,8 @@ const MIME_TYPES = new Map([
   [".html", "text/html"],
   [".css", "text/css"],
   [".js", "text/javascript"],
-  [".svg", "image/svg+xml"]
+  [".svg", "image/svg+xml"],
+  [".json", "application/json"]
 ]);
 
 async function readText(path) {
@@ -64,7 +65,7 @@ test("all browser assets are served successfully by a static server", async () =
   const { port } = server.address();
 
   try {
-    for (const asset of ["/", "/index.html", "/styles.css", "/src/app.js", "/src/chat.js", "/src/services.js", "/src/aiResponses.js", "/favicon.svg"]) {
+    for (const asset of ["/", "/index.html", "/styles.css", "/src/app.js", "/src/chat.js", "/src/services.js", "/src/aiResponses.js", "/favicon.svg", "/privacy-policy.html", "/manifest.json"]) {
       const response = await fetch(`http://127.0.0.1:${port}${asset}`);
       assert.equal(response.status, 200, `${asset} should return 200`);
       assert.equal((await response.text()).length > 0, true, `${asset} should not be empty`);
