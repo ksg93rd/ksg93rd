@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://ksg93rd.github.io/ksg93rd/sitemap.xml
+Sitemap: https://poormanshedgefund.net/sitemap.xml
