@@ -1,11 +1,47 @@
 // Kismoe Chat Widget
 
 import { getAIResponse } from './aiResponses.js';
+import { supabase } from './supabase.js';
+import { currentUser } from './auth.js';
 
 const STORAGE_KEY = 'kismoe-chat-v1';
 let chatHistory = [];
 let chatContext = null;
 let isOpen = false;
+
+async function callClaudeAPI(messages, context) {
+  const { data: { session } } = await supabase.auth.getSession();
+  const token = session?.access_token;
+
+  // If no token, skip the real API call (verify_jwt: true would reject it)
+  if (!token) throw new Error('demo');
+
+  const res = await fetch('https://lfzsqoksvydmvjfkbehl.supabase.co/functions/v1/kismoe-chat', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    },
+    body: JSON.stringify({ messages, context }),
+  });
+
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  const data = await res.json();
+  if (data.demo) throw new Error('demo'); // triggers fallback
+  return data.content;
+}
+
+async function saveChatMessages(userText, assistantText) {
+  if (!currentUser) return;
+  try {
+    await supabase.from('kismoe_chat_messages').insert([
+      { user_id: currentUser.id, role: 'user', content: userText },
+      { user_id: currentUser.id, role: 'assistant', content: assistantText },
+    ]);
+  } catch (err) {
+    console.warn('Failed to save chat messages:', err);
+  }
+}
 
 export function initChat() {
   loadHistory();
@@ -62,7 +98,7 @@ function toggleChat() {
   else openChat();
 }
 
-function sendMessage() {
+async function sendMessage() {
   const input = document.getElementById('chatInput');
   const text = input?.value?.trim();
   if (!text) return;
@@ -71,12 +107,26 @@ function sendMessage() {
   addMessage('user', text);
   showTypingIndicator();
 
-  const delay = 800 + Math.random() * 800;
-  setTimeout(() => {
-    removeTypingIndicator();
-    const response = getAIResponse(text, chatContext);
-    addMessage('assistant', response);
-  }, delay);
+  // Build message array for Claude API (last 10 messages for context)
+  const apiMessages = chatHistory
+    .filter(m => m.role === 'user' || m.role === 'assistant')
+    .slice(-10)
+    .map(m => ({ role: m.role, content: m.content }));
+
+  let response;
+  try {
+    response = await callClaudeAPI(apiMessages, chatContext);
+  } catch (err) {
+    // Fallback to demo mode
+    await new Promise(resolve => setTimeout(resolve, 800 + Math.random() * 800));
+    response = getAIResponse(text, chatContext);
+  }
+
+  removeTypingIndicator();
+  addMessage('assistant', response);
+
+  // Persist to Supabase if signed in
+  saveChatMessages(text, response);
 }
 
 function addMessage(role, content) {

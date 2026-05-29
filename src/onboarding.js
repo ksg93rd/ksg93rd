@@ -1,6 +1,7 @@
 // Kismoe Onboarding Wizard — 5-Step Business Setup
 
 import { calculateHealthScore, getPriorityActions } from './healthScore.js';
+import { supabase } from './supabase.js';
 
 const STORAGE_KEY = 'kismoe-onboarding-v1';
 let currentStep = 1;
@@ -295,6 +296,11 @@ function handleNext(step) {
     saveData(finalData);
     currentStep = 5;
     renderStep(5);
+
+    // Save to Supabase in the background
+    const scores = calculateHealthScore(finalData);
+    saveToSupabase(finalData, scores);
+
     setTimeout(() => {
       const viewBtn = document.getElementById('viewDashboardBtn');
       if (viewBtn) {
@@ -423,4 +429,41 @@ function renderPriorityRoadmap(actions) {
 function updateBusinessName(name) {
   const el = document.getElementById('dashboardBusinessName');
   if (el && name) el.textContent = name;
+}
+
+async function saveToSupabase(onboardingData, scores) {
+  const { currentUser } = await import('./auth.js');
+  if (!currentUser) return;
+  try {
+    const { data: biz } = await supabase.from('kismoe_businesses').upsert({
+      user_id: currentUser.id,
+      business_name: onboardingData.businessName,
+      business_type: onboardingData.businessType,
+      industry: onboardingData.industry,
+      location: onboardingData.location,
+      stage: onboardingData.stage,
+      team_size: onboardingData.teamSize,
+      revenue: onboardingData.revenue,
+      tools: onboardingData.tools,
+      challenges: onboardingData.challenges,
+      updated_at: new Date().toISOString()
+    }, { onConflict: 'user_id' }).select().single();
+    if (biz) {
+      await supabase.from('kismoe_health_scores').insert({
+        business_id: biz.id,
+        user_id: currentUser.id,
+        overall_score: scores.overall,
+        legal_score: scores.legal,
+        financial_score: scores.financial,
+        operations_score: scores.operations,
+        marketing_score: scores.marketing,
+        technology_score: scores.technology,
+        hr_score: scores.hr,
+        cybersecurity_score: scores.cybersecurity,
+        growth_score: scores.growth,
+      });
+    }
+  } catch (err) {
+    console.warn('Failed to save onboarding data to Supabase:', err);
+  }
 }

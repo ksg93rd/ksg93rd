@@ -4,9 +4,12 @@ import { SERVICES, getServiceById } from './services.js';
 import { initChat, openChat, setChatContext } from './chat.js';
 import { initOnboarding, openWizard, showHealthDashboard } from './onboarding.js';
 import { DOCUMENT_TEMPLATES, generateDocument, downloadDocument } from './documents.js';
+import { initAuth, bindAuthEvents } from './auth.js';
 
 // ── Init ────────────────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
+  initAuth();
+  bindAuthEvents();
   initChat();
   initOnboarding();
   renderServiceCards();

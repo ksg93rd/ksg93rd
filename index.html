@@ -33,6 +33,7 @@
           </ul>
 
           <div class="nav-cta">
+            <button id="authBtn" class="btn ghost nav-auth-btn" type="button">Sign In</button>
             <button id="startJourneyBtn" class="btn primary">Start Free →</button>
           </div>
         </div>
@@ -485,6 +486,24 @@
         });
       })();
     </script>
+
+    <!-- Auth Modal -->
+    <div id="authModal" class="modal-overlay" hidden>
+      <div id="authModalBackdrop" class="modal-backdrop"></div>
+      <div class="modal-box auth-modal-box">
+        <div class="modal-header">
+          <h2>Sign in to Kismoe</h2>
+          <p class="modal-subtitle">Save your business profile, health scores, and chat history across devices.</p>
+        </div>
+        <form id="authForm" class="auth-form">
+          <label for="authEmail">Email address</label>
+          <input id="authEmail" type="email" placeholder="you@company.com" autocomplete="email" required />
+          <p id="authError" class="auth-error"></p>
+          <button type="submit" class="btn primary full-width">Send Magic Link</button>
+        </form>
+        <p class="auth-note">No password needed. We'll email you a secure sign-in link.</p>
+      </div>
+    </div>
 
     <!-- ── Main App ────────────────────────────────────────────────── -->
     <script type="module" src="src/app.js"></script>
