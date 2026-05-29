@@ -1322,3 +1322,19 @@ section { position: relative; z-index: 1; }
 
 /* ── Contact Modal ─────────────────────────────────────────────────────────── */
 .contact-modal-box { max-width: 480px; }
+
+/* ── Intro Video Section ───────────────────────────────────────────────────── */
+.video-section { padding: 5rem 0; }
+.video-wrapper {
+  max-width: 860px;
+  margin: 0 auto;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.5);
+}
+.video-wrapper video {
+  width: 100%;
+  display: block;
+  background: #000;
+}
