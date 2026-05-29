@@ -5,6 +5,7 @@ import { initChat, openChat, setChatContext } from './chat.js';
 import { initOnboarding, openWizard, showHealthDashboard } from './onboarding.js';
 import { DOCUMENT_TEMPLATES, generateDocument, downloadDocument } from './documents.js';
 import { initAuth, bindAuthEvents } from './auth.js';
+import { supabase } from './supabase.js';
 
 // ── Init ────────────────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
@@ -19,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initWebsiteBuilder();
   initDocumentGenerator();
   initPricing();
+  initWaitlist();
 
   // Listen for openService events from roadmap buttons
   document.addEventListener('openService', (e) => {
@@ -322,4 +324,52 @@ export function showToast(message, type = 'info') {
     toast.classList.remove('visible');
     setTimeout(() => toast.remove(), 300);
   }, 3500);
+}
+
+// ── Waitlist ─────────────────────────────────────────────────────────────────
+function initWaitlist() {
+  const form    = document.getElementById('waitlistForm');
+  const input   = document.getElementById('waitlistEmail');
+  const btn     = document.getElementById('waitlistSubmit');
+  const errEl   = document.getElementById('waitlistError');
+  const success = document.getElementById('waitlistSuccess');
+  if (!form) return;
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    errEl.textContent = '';
+    const email = input.value.trim().toLowerCase();
+
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      errEl.textContent = 'Please enter a valid email address.';
+      input.focus();
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = 'Joining…';
+
+    const { error } = await supabase
+      .from('kismoe_waitlist')
+      .insert({ email, source: 'hero' });
+
+    if (error) {
+      if (error.code === '23505') {
+        // Duplicate — treat as success
+        showWaitlistSuccess();
+      } else {
+        errEl.textContent = 'Something went wrong. Please try again.';
+        btn.disabled = false;
+        btn.textContent = 'Join Waitlist';
+      }
+    } else {
+      showWaitlistSuccess();
+    }
+  });
+
+  function showWaitlistSuccess() {
+    form.hidden = true;
+    success.hidden = false;
+    showToast('You\'re on the Kismoe waitlist! 🎉', 'success');
+  }
 }

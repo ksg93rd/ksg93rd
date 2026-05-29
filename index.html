@@ -80,6 +80,35 @@
               <button id="heroExploreBtn" class="btn secondary">Explore Services</button>
               <button id="heroChatBtn" class="btn ghost">💬 Ask the AI</button>
             </div>
+            <!-- Waitlist form -->
+            <div class="waitlist-box" id="waitlistBox">
+              <p class="waitlist-label">🎁 Get <strong>early access</strong> + a free Business Health Report</p>
+              <form id="waitlistForm" class="waitlist-form" novalidate>
+                <div class="waitlist-input-row">
+                  <input
+                    id="waitlistEmail"
+                    type="email"
+                    placeholder="Enter your business email"
+                    autocomplete="email"
+                    required
+                    aria-label="Email address for waitlist"
+                  />
+                  <button type="submit" class="btn primary waitlist-btn" id="waitlistSubmit">
+                    Join Waitlist
+                  </button>
+                </div>
+                <p class="waitlist-error" id="waitlistError" aria-live="polite"></p>
+              </form>
+              <div class="waitlist-success" id="waitlistSuccess" hidden>
+                <span class="waitlist-check">✅</span>
+                <div>
+                  <strong>You're on the list!</strong>
+                  <p>We'll reach out with early access &amp; your free Business Health Report.</p>
+                </div>
+              </div>
+              <p class="waitlist-note">No spam. Unsubscribe anytime.</p>
+            </div>
+
             <div class="hero-stats">
               <div class="hero-stat">
                 <span class="hero-stat-value">8</span>

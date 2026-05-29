@@ -1159,3 +1159,87 @@ section { position: relative; z-index: 1; }
 .auth-success { color: var(--accent-teal); text-align: center; padding: 1rem 0; }
 .auth-note { margin-top: 1rem; font-size: 0.8rem; color: var(--text-muted); text-align: center; }
 .full-width { width: 100%; }
+
+/* ── Waitlist ──────────────────────────────────────────────────────────────── */
+.waitlist-box {
+  background: rgba(59,130,246,0.08);
+  border: 1px solid rgba(59,130,246,0.25);
+  border-radius: 16px;
+  padding: 1.25rem 1.5rem;
+  margin: 1.5rem 0 1rem;
+  max-width: 540px;
+}
+
+.waitlist-label {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin: 0 0 0.75rem;
+}
+
+.waitlist-label strong { color: #fff; }
+
+.waitlist-form { display: flex; flex-direction: column; gap: 0.5rem; }
+
+.waitlist-input-row {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.waitlist-input-row input {
+  flex: 1;
+  padding: 0.7rem 1rem;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 10px;
+  color: #fff;
+  font-size: 0.95rem;
+  font-family: inherit;
+  transition: border-color 0.2s;
+}
+
+.waitlist-input-row input:focus {
+  outline: none;
+  border-color: var(--accent-blue);
+}
+
+.waitlist-input-row input::placeholder { color: var(--text-muted); }
+
+.waitlist-btn {
+  white-space: nowrap;
+  padding: 0.7rem 1.25rem;
+  font-size: 0.9rem;
+}
+
+.waitlist-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.waitlist-error {
+  font-size: 0.82rem;
+  color: #f87171;
+  min-height: 1rem;
+  margin: 0;
+}
+
+.waitlist-success {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.25rem 0;
+}
+
+.waitlist-success[hidden] { display: none; }
+
+.waitlist-check { font-size: 1.4rem; line-height: 1; }
+
+.waitlist-success strong { display: block; color: var(--accent-teal); font-size: 0.95rem; }
+.waitlist-success p { margin: 0.2rem 0 0; font-size: 0.82rem; color: var(--text-muted); }
+
+.waitlist-note {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin: 0.5rem 0 0;
+}
+
+@media (max-width: 500px) {
+  .waitlist-input-row { flex-direction: column; }
+  .waitlist-btn { width: 100%; }
+}
