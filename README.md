@@ -1,71 +1,46 @@
-# Emoji Oracle
+# Kismoe Business Services
 
-Emoji Oracle is a lightweight, colorful browser game that teaches players to translate between emojis and messages. Players can decode emoji clues into words, translate text prompts into emojis, type answers, use browser speech recognition where supported, earn streaks, climb a local leaderboard, and share their score.
+Kismoe is an AI-powered Business Operating System (BOS) that helps entrepreneurs, startups, and small businesses launch, manage, automate, protect, grow, and scale — all from one platform.
 
 ## Features
 
-- Two challenge directions: Emoji → Message and Message → Emoji.
-- Mixed mode for replayable mastery.
-- Rookie, Spark, and Pro difficulty levels.
-- Timed rounds, streak bonuses, hint penalties, progress tracking, and educational lessons.
-- Local leaderboard stored on the player device.
-- Share button using native share when available or clipboard fallback.
-- Browser-native speech recognition support where available, with typing as the dependable fallback.
-- Static, dependency-light architecture that can deploy to any static host.
+- 🤖 **AI Chat Assistant** — GPT-4o powered business advisor available 24/7
+- 📊 **Business Health Score** — Instant assessment across 9 dimensions
+- ⚖️ **Legal & Compliance** — LLC formation, contracts, privacy policies
+- 💰 **Finance & Accounting** — Bookkeeping setup, tax prep, funding guidance
+- 👥 **HR & People** — Hiring workflows, offer letters, employee handbooks
+- ⚙️ **Automation** — AI workflow setup and business process automation
+- 📣 **Marketing** — Brand strategy, content, SEO, social media
+- 🌐 **Website Builder** — Brief generator and platform recommendations
+- 📄 **Document Generator** — 8 ready-to-use legal and business templates
 
-## Run locally
+## Tech Stack
 
-```bash
-npm start
-```
+- Pure static SPA — HTML, CSS, ES Modules (no framework)
+- Supabase — Auth (magic link), PostgreSQL, Edge Functions
+- OpenAI GPT-4o — via Supabase Edge Function
+- GitHub Pages — hosting
+- Plausible Analytics — privacy-friendly tracking
+- n8n — email marketing automation
 
-Then open `http://localhost:4173`.
+## Live Demo
 
-## Test
+[ksg93rd.github.io/ksg93rd](https://ksg93rd.github.io/ksg93rd/)
 
-Run the full validation suite:
+## Getting Started
 
-```bash
-npm run test:all
-```
-
-Run only the fast unit tests:
-
-```bash
-npm run test:unit
-```
-
-Run static app smoke tests:
+No build step required. Open `index.html` in a browser or serve with any static file server.
 
 ```bash
-npm run test:smoke
+npx serve .
 ```
 
-## Architecture
-
-- `index.html` contains the semantic app shell.
-- `styles.css` contains the responsive visual design system.
-- `src/challenges.js` contains difficulty metadata and challenge content.
-- `src/gameLogic.js` contains pure matching, scoring, deck, and share helpers.
-- `src/app.js` contains browser rendering, speech recognition, localStorage, and game state.
-- `docs/cad-plan.md` contains the CAD architecture, UX, automation, testing, deployment, and roadmap plan.
-
-## Local launch
-
-Preview on the current machine:
+## Testing
 
 ```bash
-npm start
+npm test
 ```
 
-Expose on the local network for phone/tablet testing:
+## License
 
-```bash
-npm run launch:local
-```
-
-## Deployment
-
-The recommended MVP launch target is GitHub Pages because the app is fully static and does not require a backend, build step, database, or secrets. This repository includes a GitHub Actions Pages workflow at `.github/workflows/pages.yml` that runs `npm run test:all` before deploying.
-
-For the full launch checklist, see `docs/launch-plan.md`. Netlify, Vercel, or Cloudflare Pages are also compatible static hosts.
+© Kismoe Business Services. All rights reserved.
