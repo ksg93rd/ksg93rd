@@ -109,6 +109,19 @@ automated finding.
 | Corrupted index | index is disposable; rebuild |
 | Processing an incomplete source set | availability checks fail loudly instead of reading a placeholder as empty |
 
+## Publication boundary
+
+This vault ships inside a **public** repository whose website is deployed to
+GitHub Pages. The Pages workflow stages the site into `_site/` and excludes
+`AI-Knowledge-Vault/`, with a build-time assertion (`test ! -e
+_site/AI-Knowledge-Vault`) so the exclusion cannot silently regress, plus a
+smoke test run against the staged artifact.
+
+That is defence in depth, not permission: **real knowledge belongs in the
+iCloud vault on your Mac, never in the repository copy.** The repository copy
+should contain only the engine, the documentation, and clearly-marked synthetic
+demo data.
+
 ## Reporting honestly
 
 Never write "no injection detected" as a guarantee. The correct phrasing is

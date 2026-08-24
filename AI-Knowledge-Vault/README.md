@@ -15,6 +15,12 @@ someone resolves them — nothing quietly rounds itself up to "true".
 
 ---
 
+> **This folder in the repository is the installable template, not your vault.**
+> Your actual knowledge lives in iCloud Drive on your Mac. This repository is
+> public and its website is published to GitHub Pages, so the Pages build
+> deliberately excludes this folder — but the safe habit is simple: **put real
+> knowledge in the iCloud vault, never in the repository copy.**
+
 ## Where is my data?
 
 In your iCloud Drive, in a folder called `AI-Knowledge-Vault`. On a Mac:
