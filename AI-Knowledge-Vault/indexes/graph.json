@@ -1,0 +1,704 @@
+{
+  "schema_version": "1.0.0",
+  "generated_at": "2026-08-24T21:35:45+00:00",
+  "generator": "vault.py graph-export",
+  "authoritative": false,
+  "note": "Derived from Markdown records. Rebuildable. Never edit by hand.",
+  "counts": {
+    "nodes": 25,
+    "edges": 43,
+    "dangling_edges": 0,
+    "load_errors": 0
+  },
+  "nodes": [
+    {
+      "id": "claim-20260824-22e64238",
+      "type": "claim",
+      "title": "Median API response latency decreased from 420 ms to 180 ms after the June 2026",
+      "status": "candidate",
+      "trust_level": "untrusted",
+      "review_status": "pending",
+      "verification_status": "unverified",
+      "demo": true,
+      "path": "10-claims/claim-20260824-22e64238--median-api-response-latency-decreased-from-420-ms-to-180-ms.md",
+      "updated_at": "2026-08-24T21:33:46+00:00"
+    },
+    {
+      "id": "claim-20260824-316fe696",
+      "type": "claim",
+      "title": "DEMO - Median API response latency increased from 180 ms to 420 ms after the June 2026 caching rollout",
+      "status": "disputed",
+      "trust_level": "internal",
+      "review_status": "disputed",
+      "verification_status": "unverified",
+      "demo": true,
+      "path": "10-claims/claim-20260824-316fe696--demo-median-api-response-latency-increased-from-180-ms-to-42.md",
+      "updated_at": "2026-08-24T21:33:46+00:00"
+    },
+    {
+      "id": "claim-20260824-553f921e",
+      "type": "claim",
+      "title": "Support ticket volume decreased by 31 percent in Q2 2026 compared with Q1 2026",
+      "status": "verified",
+      "trust_level": "untrusted",
+      "review_status": "approved",
+      "verification_status": "verified",
+      "demo": true,
+      "path": "10-claims/claim-20260824-553f921e--support-ticket-volume-decreased-by-31-percent-in-q2-2026-com.md",
+      "updated_at": "2026-08-24T21:33:46+00:00"
+    },
+    {
+      "id": "claim-20260824-80956143",
+      "type": "claim",
+      "title": "DEMO - Support ticket volume decreased by 31 percent in Q2 2026 compared with Q1 2026",
+      "status": "verified",
+      "trust_level": "internal",
+      "review_status": "approved",
+      "verification_status": "verified",
+      "demo": true,
+      "path": "10-claims/claim-20260824-80956143--demo-support-ticket-volume-decreased-by-31-percent-in-q2-202.md",
+      "updated_at": "2026-08-24T21:33:41+00:00"
+    },
+    {
+      "id": "claim-20260824-9051683d",
+      "type": "claim",
+      "title": "Median API response latency increased from 180 ms to 420 ms after the June 2026",
+      "status": "candidate",
+      "trust_level": "untrusted",
+      "review_status": "pending",
+      "verification_status": "unverified",
+      "demo": true,
+      "path": "10-claims/claim-20260824-9051683d--median-api-response-latency-increased-from-180-ms-to-420-ms.md",
+      "updated_at": "2026-08-24T21:33:46+00:00"
+    },
+    {
+      "id": "claim-20260824-d7d3ce9b",
+      "type": "claim",
+      "title": "DEMO - Median API response latency decreased from 420 ms to 180 ms after the June 2026 caching rollout",
+      "status": "candidate",
+      "trust_level": "internal",
+      "review_status": "pending",
+      "verification_status": "unverified",
+      "demo": true,
+      "path": "10-claims/claim-20260824-d7d3ce9b--demo-median-api-response-latency-decreased-from-420-ms-to-18.md",
+      "updated_at": "2026-08-24T21:33:41+00:00"
+    },
+    {
+      "id": "decision-20260824-d3c31e1c",
+      "type": "decision",
+      "title": "DEMO - Keep the June 2026 caching rollout in place",
+      "status": "accepted",
+      "trust_level": "internal",
+      "review_status": "pending",
+      "verification_status": null,
+      "demo": true,
+      "path": "40-decisions/decision-20260824-d3c31e1c--demo-keep-the-june-2026-caching-rollout-in-place.md",
+      "updated_at": "2026-08-24T21:33:41+00:00"
+    },
+    {
+      "id": "entity-20260824-059aed03",
+      "type": "entity",
+      "title": "DEMO - Northwind Analytics",
+      "status": "candidate",
+      "trust_level": "internal",
+      "review_status": null,
+      "verification_status": null,
+      "demo": true,
+      "path": "30-entities/entity-20260824-059aed03--demo-northwind-analytics.md",
+      "updated_at": "2026-08-24T21:33:41+00:00"
+    },
+    {
+      "id": "review-20260824-196e6a7f",
+      "type": "review",
+      "title": "Review of claim-20260824-80956143: approved",
+      "status": "approved",
+      "trust_level": "internal",
+      "review_status": null,
+      "verification_status": null,
+      "demo": true,
+      "path": "80-reviews/review-20260824-196e6a7f--review-of-claim-20260824-80956143-approved.md",
+      "updated_at": "2026-08-24T21:33:41+00:00"
+    },
+    {
+      "id": "review-20260824-76be0b32",
+      "type": "review",
+      "title": "Review of claim-20260824-316fe696: disputed",
+      "status": "disputed",
+      "trust_level": "internal",
+      "review_status": null,
+      "verification_status": null,
+      "demo": true,
+      "path": "80-reviews/review-20260824-76be0b32--review-of-claim-20260824-316fe696-disputed.md",
+      "updated_at": "2026-08-24T21:33:46+00:00"
+    },
+    {
+      "id": "review-20260824-bad2c027",
+      "type": "review",
+      "title": "Review of claim-20260824-553f921e: approved",
+      "status": "approved",
+      "trust_level": "internal",
+      "review_status": null,
+      "verification_status": null,
+      "demo": true,
+      "path": "80-reviews/review-20260824-bad2c027--review-of-claim-20260824-553f921e-approved.md",
+      "updated_at": "2026-08-24T21:33:46+00:00"
+    },
+    {
+      "id": "review-20260824-dfe1baca",
+      "type": "review",
+      "title": "Review of claim-20260824-316fe696: disputed",
+      "status": "disputed",
+      "trust_level": "internal",
+      "review_status": null,
+      "verification_status": null,
+      "demo": true,
+      "path": "80-reviews/review-20260824-dfe1baca--review-of-claim-20260824-316fe696-disputed.md",
+      "updated_at": "2026-08-24T21:33:41+00:00"
+    },
+    {
+      "id": "run-20260824-213341-211f2883",
+      "type": "run",
+      "title": "seed synthetic demo data",
+      "status": "success",
+      "trust_level": "internal",
+      "review_status": null,
+      "verification_status": null,
+      "demo": true,
+      "path": "70-runs/run-20260824-213341-211f2883--seed-synthetic-demo-data.md",
+      "updated_at": "2026-08-24T21:33:41+00:00"
+    },
+    {
+      "id": "run-20260824-213345-9907cb96",
+      "type": "run",
+      "title": "end-to-end acceptance test (20-step synthetic workflow)",
+      "status": "success",
+      "trust_level": "internal",
+      "review_status": null,
+      "verification_status": null,
+      "demo": true,
+      "path": "70-runs/run-20260824-213345-9907cb96--end-to-end-acceptance-test-20-step-synthetic-workflow.md",
+      "updated_at": "2026-08-24T21:33:47+00:00"
+    },
+    {
+      "id": "run-20260824-213346-270e9572",
+      "type": "run",
+      "title": "ingest /tmp/vault-acceptance-qbh2ebv7/inputs/acceptance-contra.md",
+      "status": "success",
+      "trust_level": "internal",
+      "review_status": null,
+      "verification_status": null,
+      "demo": true,
+      "path": "70-runs/run-20260824-213346-270e9572--ingest-tmp-vault-acceptance-qbh2ebv7-inputs-acceptance-contr.md",
+      "updated_at": "2026-08-24T21:33:46+00:00"
+    },
+    {
+      "id": "run-20260824-213346-2dffe61a",
+      "type": "run",
+      "title": "ingest /tmp/vault-acceptance-qbh2ebv7/inputs/acceptance-note.md",
+      "status": "success",
+      "trust_level": "internal",
+      "review_status": null,
+      "verification_status": null,
+      "demo": true,
+      "path": "70-runs/run-20260824-213346-2dffe61a--ingest-tmp-vault-acceptance-qbh2ebv7-inputs-acceptance-note.md",
+      "updated_at": "2026-08-24T21:33:46+00:00"
+    },
+    {
+      "id": "run-20260824-213346-62ed2876",
+      "type": "run",
+      "title": "ingest /tmp/vault-acceptance-qbh2ebv7/inputs/acceptance-note.md",
+      "status": "success",
+      "trust_level": "internal",
+      "review_status": null,
+      "verification_status": null,
+      "demo": true,
+      "path": "70-runs/run-20260824-213346-62ed2876--ingest-tmp-vault-acceptance-qbh2ebv7-inputs-acceptance-note.md",
+      "updated_at": "2026-08-24T21:33:46+00:00"
+    },
+    {
+      "id": "run-20260824-213346-b0318e83",
+      "type": "run",
+      "title": "review claim-20260824-316fe696 -> approved",
+      "status": "partial",
+      "trust_level": "internal",
+      "review_status": null,
+      "verification_status": null,
+      "demo": false,
+      "path": "70-runs/run-20260824-213346-b0318e83--review-claim-20260824-316fe696-approved.md",
+      "updated_at": "2026-08-24T21:33:46+00:00"
+    },
+    {
+      "id": "run-20260824-213346-d576ca9a",
+      "type": "run",
+      "title": "review claim-20260824-316fe696 -> disputed",
+      "status": "success",
+      "trust_level": "internal",
+      "review_status": null,
+      "verification_status": null,
+      "demo": false,
+      "path": "70-runs/run-20260824-213346-d576ca9a--review-claim-20260824-316fe696-disputed.md",
+      "updated_at": "2026-08-24T21:33:46+00:00"
+    },
+    {
+      "id": "run-20260824-213346-e3863ed0",
+      "type": "run",
+      "title": "review claim-20260824-553f921e -> approved",
+      "status": "success",
+      "trust_level": "internal",
+      "review_status": null,
+      "verification_status": null,
+      "demo": false,
+      "path": "70-runs/run-20260824-213346-e3863ed0--review-claim-20260824-553f921e-approved.md",
+      "updated_at": "2026-08-24T21:33:46+00:00"
+    },
+    {
+      "id": "run-20260824-213426-ad726f12",
+      "type": "run",
+      "title": "seed quarantine demonstration",
+      "status": "success",
+      "trust_level": "internal",
+      "review_status": null,
+      "verification_status": null,
+      "demo": true,
+      "path": "70-runs/run-20260824-213426-ad726f12--seed-quarantine-demonstration.md",
+      "updated_at": "2026-08-24T21:34:26+00:00"
+    },
+    {
+      "id": "source-20260824-97eacd0c",
+      "type": "source",
+      "title": "ACCEPTANCE - Conflicting Synthetic Note",
+      "status": "candidate",
+      "trust_level": "untrusted",
+      "review_status": null,
+      "verification_status": null,
+      "demo": true,
+      "path": "20-sources/source-20260824-97eacd0c--acceptance-conflicting-synthetic-note.md",
+      "updated_at": "2026-08-24T21:33:46+00:00"
+    },
+    {
+      "id": "source-20260824-ad94426c",
+      "type": "source",
+      "title": "ACCEPTANCE - Synthetic Operations Note",
+      "status": "candidate",
+      "trust_level": "untrusted",
+      "review_status": null,
+      "verification_status": null,
+      "demo": true,
+      "path": "20-sources/source-20260824-ad94426c--acceptance-synthetic-operations-note.md",
+      "updated_at": "2026-08-24T21:33:46+00:00"
+    },
+    {
+      "id": "source-20260824-b023f55c",
+      "type": "source",
+      "title": "DEMO-hostile-note-wq5nb9fj.txt",
+      "status": "candidate",
+      "trust_level": "quarantined",
+      "review_status": null,
+      "verification_status": null,
+      "demo": true,
+      "path": "90-archive/quarantine/source-20260824-b023f55c--demo-hostile-note-wq5nb9fj-txt.md",
+      "updated_at": "2026-08-24T21:34:26+00:00"
+    },
+    {
+      "id": "source-20260824-b694bc79",
+      "type": "source",
+      "title": "DEMO - Northwind Analytics Q2 2026 Operations Report",
+      "status": "candidate",
+      "trust_level": "internal",
+      "review_status": null,
+      "verification_status": null,
+      "demo": true,
+      "path": "20-sources/source-20260824-b694bc79--demo-northwind-analytics-q2-2026-operations-report.md",
+      "updated_at": "2026-08-24T21:33:41+00:00"
+    }
+  ],
+  "edges": [
+    {
+      "source": "claim-20260824-22e64238",
+      "relationship": "CONTRADICTS",
+      "target": "claim-20260824-316fe696",
+      "run_id": "run-20260824-213346-2dffe61a",
+      "created_at": "2026-08-24T21:33:46+00:00",
+      "evidence": "contradicts",
+      "dangling": false
+    },
+    {
+      "source": "claim-20260824-22e64238",
+      "relationship": "DERIVED_FROM",
+      "target": "source-20260824-ad94426c",
+      "run_id": "run-20260824-213346-2dffe61a",
+      "created_at": "2026-08-24T21:33:46+00:00",
+      "evidence": "sources",
+      "dangling": false
+    },
+    {
+      "source": "claim-20260824-22e64238",
+      "relationship": "PRODUCED_BY",
+      "target": "run-20260824-213346-2dffe61a",
+      "run_id": "run-20260824-213346-2dffe61a",
+      "created_at": "2026-08-24T21:33:46+00:00",
+      "evidence": "run_id",
+      "dangling": false
+    },
+    {
+      "source": "claim-20260824-22e64238",
+      "relationship": "SUPPORTS",
+      "target": "claim-20260824-d7d3ce9b",
+      "run_id": "run-20260824-213346-2dffe61a",
+      "created_at": "2026-08-24T21:33:46+00:00",
+      "evidence": "supports",
+      "dangling": false
+    },
+    {
+      "source": "claim-20260824-316fe696",
+      "relationship": "CONTRADICTS",
+      "target": "claim-20260824-d7d3ce9b",
+      "run_id": "run-20260824-213341-211f2883",
+      "created_at": "2026-08-24T21:33:46+00:00",
+      "evidence": "contradicts",
+      "dangling": false
+    },
+    {
+      "source": "claim-20260824-316fe696",
+      "relationship": "DERIVED_FROM",
+      "target": "source-20260824-b694bc79",
+      "run_id": "run-20260824-213341-211f2883",
+      "created_at": "2026-08-24T21:33:46+00:00",
+      "evidence": "sources",
+      "dangling": false
+    },
+    {
+      "source": "claim-20260824-316fe696",
+      "relationship": "MENTIONS",
+      "target": "entity-20260824-059aed03",
+      "run_id": "run-20260824-213341-211f2883",
+      "created_at": "2026-08-24T21:33:46+00:00",
+      "evidence": "entities",
+      "dangling": false
+    },
+    {
+      "source": "claim-20260824-316fe696",
+      "relationship": "PRODUCED_BY",
+      "target": "run-20260824-213341-211f2883",
+      "run_id": "run-20260824-213341-211f2883",
+      "created_at": "2026-08-24T21:33:46+00:00",
+      "evidence": "run_id",
+      "dangling": false
+    },
+    {
+      "source": "claim-20260824-553f921e",
+      "relationship": "DERIVED_FROM",
+      "target": "source-20260824-ad94426c",
+      "run_id": "run-20260824-213346-2dffe61a",
+      "created_at": "2026-08-24T21:33:46+00:00",
+      "evidence": "sources",
+      "dangling": false
+    },
+    {
+      "source": "claim-20260824-553f921e",
+      "relationship": "PRODUCED_BY",
+      "target": "run-20260824-213346-2dffe61a",
+      "run_id": "run-20260824-213346-2dffe61a",
+      "created_at": "2026-08-24T21:33:46+00:00",
+      "evidence": "run_id",
+      "dangling": false
+    },
+    {
+      "source": "claim-20260824-553f921e",
+      "relationship": "SUPPORTS",
+      "target": "claim-20260824-80956143",
+      "run_id": "run-20260824-213346-2dffe61a",
+      "created_at": "2026-08-24T21:33:46+00:00",
+      "evidence": "supports",
+      "dangling": false
+    },
+    {
+      "source": "claim-20260824-80956143",
+      "relationship": "DERIVED_FROM",
+      "target": "source-20260824-b694bc79",
+      "run_id": "run-20260824-213341-211f2883",
+      "created_at": "2026-08-24T21:33:41+00:00",
+      "evidence": "sources",
+      "dangling": false
+    },
+    {
+      "source": "claim-20260824-80956143",
+      "relationship": "MENTIONS",
+      "target": "entity-20260824-059aed03",
+      "run_id": "run-20260824-213341-211f2883",
+      "created_at": "2026-08-24T21:33:41+00:00",
+      "evidence": "entities",
+      "dangling": false
+    },
+    {
+      "source": "claim-20260824-80956143",
+      "relationship": "PRODUCED_BY",
+      "target": "run-20260824-213341-211f2883",
+      "run_id": "run-20260824-213341-211f2883",
+      "created_at": "2026-08-24T21:33:41+00:00",
+      "evidence": "run_id",
+      "dangling": false
+    },
+    {
+      "source": "claim-20260824-80956143",
+      "relationship": "SUPPORTS",
+      "target": "claim-20260824-d7d3ce9b",
+      "run_id": "run-20260824-213341-211f2883",
+      "created_at": "2026-08-24T21:33:41+00:00",
+      "evidence": "supports",
+      "dangling": false
+    },
+    {
+      "source": "claim-20260824-9051683d",
+      "relationship": "CONTRADICTS",
+      "target": "claim-20260824-22e64238",
+      "run_id": "run-20260824-213346-270e9572",
+      "created_at": "2026-08-24T21:33:46+00:00",
+      "evidence": "contradicts",
+      "dangling": false
+    },
+    {
+      "source": "claim-20260824-9051683d",
+      "relationship": "CONTRADICTS",
+      "target": "claim-20260824-d7d3ce9b",
+      "run_id": "run-20260824-213346-270e9572",
+      "created_at": "2026-08-24T21:33:46+00:00",
+      "evidence": "contradicts",
+      "dangling": false
+    },
+    {
+      "source": "claim-20260824-9051683d",
+      "relationship": "DERIVED_FROM",
+      "target": "source-20260824-97eacd0c",
+      "run_id": "run-20260824-213346-270e9572",
+      "created_at": "2026-08-24T21:33:46+00:00",
+      "evidence": "sources",
+      "dangling": false
+    },
+    {
+      "source": "claim-20260824-9051683d",
+      "relationship": "PRODUCED_BY",
+      "target": "run-20260824-213346-270e9572",
+      "run_id": "run-20260824-213346-270e9572",
+      "created_at": "2026-08-24T21:33:46+00:00",
+      "evidence": "run_id",
+      "dangling": false
+    },
+    {
+      "source": "claim-20260824-9051683d",
+      "relationship": "SUPPORTS",
+      "target": "claim-20260824-316fe696",
+      "run_id": "run-20260824-213346-270e9572",
+      "created_at": "2026-08-24T21:33:46+00:00",
+      "evidence": "supports",
+      "dangling": false
+    },
+    {
+      "source": "claim-20260824-d7d3ce9b",
+      "relationship": "CONTRADICTS",
+      "target": "claim-20260824-316fe696",
+      "run_id": "run-20260824-213341-211f2883",
+      "created_at": "2026-08-24T21:33:41+00:00",
+      "evidence": "contradicts",
+      "dangling": false
+    },
+    {
+      "source": "claim-20260824-d7d3ce9b",
+      "relationship": "DERIVED_FROM",
+      "target": "source-20260824-b694bc79",
+      "run_id": "run-20260824-213341-211f2883",
+      "created_at": "2026-08-24T21:33:41+00:00",
+      "evidence": "sources",
+      "dangling": false
+    },
+    {
+      "source": "claim-20260824-d7d3ce9b",
+      "relationship": "MENTIONS",
+      "target": "entity-20260824-059aed03",
+      "run_id": "run-20260824-213341-211f2883",
+      "created_at": "2026-08-24T21:33:41+00:00",
+      "evidence": "entities",
+      "dangling": false
+    },
+    {
+      "source": "claim-20260824-d7d3ce9b",
+      "relationship": "PRODUCED_BY",
+      "target": "run-20260824-213341-211f2883",
+      "run_id": "run-20260824-213341-211f2883",
+      "created_at": "2026-08-24T21:33:41+00:00",
+      "evidence": "run_id",
+      "dangling": false
+    },
+    {
+      "source": "decision-20260824-d3c31e1c",
+      "relationship": "DERIVED_FROM",
+      "target": "source-20260824-b694bc79",
+      "run_id": "run-20260824-213341-211f2883",
+      "created_at": "2026-08-24T21:33:41+00:00",
+      "evidence": "sources",
+      "dangling": false
+    },
+    {
+      "source": "decision-20260824-d3c31e1c",
+      "relationship": "MENTIONS",
+      "target": "entity-20260824-059aed03",
+      "run_id": "run-20260824-213341-211f2883",
+      "created_at": "2026-08-24T21:33:41+00:00",
+      "evidence": "entities",
+      "dangling": false
+    },
+    {
+      "source": "decision-20260824-d3c31e1c",
+      "relationship": "PRODUCED_BY",
+      "target": "run-20260824-213341-211f2883",
+      "run_id": "run-20260824-213341-211f2883",
+      "created_at": "2026-08-24T21:33:41+00:00",
+      "evidence": "run_id",
+      "dangling": false
+    },
+    {
+      "source": "decision-20260824-d3c31e1c",
+      "relationship": "RELATED_TO",
+      "target": "claim-20260824-80956143",
+      "run_id": "run-20260824-213341-211f2883",
+      "created_at": "2026-08-24T21:33:41+00:00",
+      "evidence": "claims",
+      "dangling": false
+    },
+    {
+      "source": "decision-20260824-d3c31e1c",
+      "relationship": "RELATED_TO",
+      "target": "claim-20260824-d7d3ce9b",
+      "run_id": "run-20260824-213341-211f2883",
+      "created_at": "2026-08-24T21:33:41+00:00",
+      "evidence": "claims",
+      "dangling": false
+    },
+    {
+      "source": "entity-20260824-059aed03",
+      "relationship": "DERIVED_FROM",
+      "target": "source-20260824-b694bc79",
+      "run_id": "run-20260824-213341-211f2883",
+      "created_at": "2026-08-24T21:33:41+00:00",
+      "evidence": "sources",
+      "dangling": false
+    },
+    {
+      "source": "entity-20260824-059aed03",
+      "relationship": "PRODUCED_BY",
+      "target": "run-20260824-213341-211f2883",
+      "run_id": "run-20260824-213341-211f2883",
+      "created_at": "2026-08-24T21:33:41+00:00",
+      "evidence": "run_id",
+      "dangling": false
+    },
+    {
+      "source": "review-20260824-196e6a7f",
+      "relationship": "PRODUCED_BY",
+      "target": "run-20260824-213341-211f2883",
+      "run_id": "run-20260824-213341-211f2883",
+      "created_at": "2026-08-24T21:33:41+00:00",
+      "evidence": "run_id",
+      "dangling": false
+    },
+    {
+      "source": "review-20260824-196e6a7f",
+      "relationship": "REVIEWED_BY",
+      "target": "claim-20260824-80956143",
+      "run_id": "run-20260824-213341-211f2883",
+      "created_at": "2026-08-24T21:33:41+00:00",
+      "evidence": "target",
+      "dangling": false
+    },
+    {
+      "source": "review-20260824-76be0b32",
+      "relationship": "PRODUCED_BY",
+      "target": "run-20260824-213346-d576ca9a",
+      "run_id": "run-20260824-213346-d576ca9a",
+      "created_at": "2026-08-24T21:33:46+00:00",
+      "evidence": "run_id",
+      "dangling": false
+    },
+    {
+      "source": "review-20260824-76be0b32",
+      "relationship": "REVIEWED_BY",
+      "target": "claim-20260824-316fe696",
+      "run_id": "run-20260824-213346-d576ca9a",
+      "created_at": "2026-08-24T21:33:46+00:00",
+      "evidence": "target",
+      "dangling": false
+    },
+    {
+      "source": "review-20260824-bad2c027",
+      "relationship": "PRODUCED_BY",
+      "target": "run-20260824-213346-e3863ed0",
+      "run_id": "run-20260824-213346-e3863ed0",
+      "created_at": "2026-08-24T21:33:46+00:00",
+      "evidence": "run_id",
+      "dangling": false
+    },
+    {
+      "source": "review-20260824-bad2c027",
+      "relationship": "REVIEWED_BY",
+      "target": "claim-20260824-553f921e",
+      "run_id": "run-20260824-213346-e3863ed0",
+      "created_at": "2026-08-24T21:33:46+00:00",
+      "evidence": "target",
+      "dangling": false
+    },
+    {
+      "source": "review-20260824-dfe1baca",
+      "relationship": "PRODUCED_BY",
+      "target": "run-20260824-213341-211f2883",
+      "run_id": "run-20260824-213341-211f2883",
+      "created_at": "2026-08-24T21:33:41+00:00",
+      "evidence": "run_id",
+      "dangling": false
+    },
+    {
+      "source": "review-20260824-dfe1baca",
+      "relationship": "REVIEWED_BY",
+      "target": "claim-20260824-316fe696",
+      "run_id": "run-20260824-213341-211f2883",
+      "created_at": "2026-08-24T21:33:41+00:00",
+      "evidence": "target",
+      "dangling": false
+    },
+    {
+      "source": "source-20260824-97eacd0c",
+      "relationship": "PRODUCED_BY",
+      "target": "run-20260824-213346-270e9572",
+      "run_id": "run-20260824-213346-270e9572",
+      "created_at": "2026-08-24T21:33:46+00:00",
+      "evidence": "run_id",
+      "dangling": false
+    },
+    {
+      "source": "source-20260824-ad94426c",
+      "relationship": "PRODUCED_BY",
+      "target": "run-20260824-213346-2dffe61a",
+      "run_id": "run-20260824-213346-2dffe61a",
+      "created_at": "2026-08-24T21:33:46+00:00",
+      "evidence": "run_id",
+      "dangling": false
+    },
+    {
+      "source": "source-20260824-b023f55c",
+      "relationship": "PRODUCED_BY",
+      "target": "run-20260824-213426-ad726f12",
+      "run_id": "run-20260824-213426-ad726f12",
+      "created_at": "2026-08-24T21:34:26+00:00",
+      "evidence": "run_id",
+      "dangling": false
+    },
+    {
+      "source": "source-20260824-b694bc79",
+      "relationship": "PRODUCED_BY",
+      "target": "run-20260824-213341-211f2883",
+      "run_id": "run-20260824-213341-211f2883",
+      "created_at": "2026-08-24T21:33:41+00:00",
+      "evidence": "run_id",
+      "dangling": false
+    }
+  ]
+}

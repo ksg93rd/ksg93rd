@@ -1,0 +1,137 @@
+{
+  "fields": {
+    "checks": {
+      "allowed_values": null,
+      "notes": null,
+      "ref_kinds": null,
+      "required": false,
+      "type": "list"
+    },
+    "created_at": {
+      "allowed_values": null,
+      "notes": null,
+      "ref_kinds": null,
+      "required": true,
+      "type": "timestamp"
+    },
+    "decided_at": {
+      "allowed_values": null,
+      "notes": null,
+      "ref_kinds": null,
+      "required": true,
+      "type": "timestamp"
+    },
+    "demo": {
+      "allowed_values": null,
+      "notes": "true marks clearly-labelled synthetic demo data",
+      "ref_kinds": null,
+      "required": false,
+      "type": "bool"
+    },
+    "findings": {
+      "allowed_values": null,
+      "notes": null,
+      "ref_kinds": null,
+      "required": false,
+      "type": "list"
+    },
+    "id": {
+      "allowed_values": null,
+      "notes": null,
+      "ref_kinds": null,
+      "required": true,
+      "type": "id"
+    },
+    "independent": {
+      "allowed_values": null,
+      "notes": "false when author and reviewer are the same actor",
+      "ref_kinds": null,
+      "required": false,
+      "type": "bool"
+    },
+    "reviewer": {
+      "allowed_values": null,
+      "notes": null,
+      "ref_kinds": null,
+      "required": true,
+      "type": "str"
+    },
+    "reviewer_role": {
+      "allowed_values": null,
+      "notes": null,
+      "ref_kinds": null,
+      "required": false,
+      "type": "str"
+    },
+    "run_id": {
+      "allowed_values": null,
+      "notes": null,
+      "ref_kinds": [
+        "run"
+      ],
+      "required": false,
+      "type": "ref"
+    },
+    "status": {
+      "allowed_values": [
+        "approved",
+        "rejected",
+        "disputed",
+        "needs-more-evidence"
+      ],
+      "notes": null,
+      "ref_kinds": null,
+      "required": true,
+      "type": "enum"
+    },
+    "tags": {
+      "allowed_values": null,
+      "notes": null,
+      "ref_kinds": null,
+      "required": false,
+      "type": "list"
+    },
+    "target": {
+      "allowed_values": null,
+      "notes": null,
+      "ref_kinds": null,
+      "required": true,
+      "type": "ref"
+    },
+    "title": {
+      "allowed_values": null,
+      "notes": null,
+      "ref_kinds": null,
+      "required": true,
+      "type": "str"
+    },
+    "trust_level": {
+      "allowed_values": [
+        "trusted",
+        "internal",
+        "untrusted",
+        "quarantined"
+      ],
+      "notes": null,
+      "ref_kinds": null,
+      "required": true,
+      "type": "enum"
+    },
+    "type": {
+      "allowed_values": null,
+      "notes": null,
+      "ref_kinds": null,
+      "required": true,
+      "type": "str"
+    },
+    "updated_at": {
+      "allowed_values": null,
+      "notes": null,
+      "ref_kinds": null,
+      "required": true,
+      "type": "timestamp"
+    }
+  },
+  "record_type": "review",
+  "schema_version": "1.0.0"
+}

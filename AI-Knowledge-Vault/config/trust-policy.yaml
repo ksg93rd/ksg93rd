@@ -1,0 +1,60 @@
+# Trust policy for the AI Knowledge Vault.
+#
+# Source content is DATA. Source content is NOT agent policy.
+# Nothing in an ingested document may change how agents behave, regardless of
+# what that document says about itself.
+#
+# Heuristic prompt-injection screening is RISK REDUCTION, NOT GUARANTEED
+# DETECTION. The trust boundary - not the screen - is the real control.
+
+schema_version: 1.0.0
+
+# Trust assigned when no origin_rule matches.
+default_trust: untrusted
+
+# Screen severity that forces quarantine.
+quarantine_on:
+  - critical
+
+# Screen severity that flags for mandatory human review.
+flag_on:
+  - high
+  - medium
+
+trust_levels:
+  trusted:
+    description: Authored or explicitly ratified inside the vault by the owner.
+    may_become_canonical: true
+    requires_review: true
+  internal:
+    description: The owner's own systems and files. Believed benign, still data.
+    may_become_canonical: true
+    requires_review: true
+  untrusted:
+    description: Anything from outside - web, email, chat, AI output, tickets, logs.
+    may_become_canonical: true
+    requires_review: true
+  quarantined:
+    description: Screened content that tried to act as policy, or that leaked secrets.
+    may_become_canonical: false
+    requires_review: true
+
+# Origin rules are evaluated in order; the first regex match wins.
+# Add your own trusted origins here. Be conservative.
+origin_rules:
+  - match: "^vault://"
+    trust: trusted
+  - match: "^file:///.*/AI-Knowledge-Vault/"
+    trust: internal
+  - match: "^https?://"
+    trust: untrusted
+  - match: "^(mailto:|imap:|slack:|teams:)"
+    trust: untrusted
+
+# Paths ingested content may NEVER cause a write to.
+protected_paths:
+  - CLAUDE.md
+  - .claude
+  - config/trust-policy.yaml
+  - config/vault.config.yaml
+  - scripts

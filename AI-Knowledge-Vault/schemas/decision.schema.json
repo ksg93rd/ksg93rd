@@ -1,0 +1,209 @@
+{
+  "fields": {
+    "claims": {
+      "allowed_values": null,
+      "notes": null,
+      "ref_kinds": [
+        "claim"
+      ],
+      "required": false,
+      "type": "reflist"
+    },
+    "consequences": {
+      "allowed_values": null,
+      "notes": null,
+      "ref_kinds": null,
+      "required": false,
+      "type": "list"
+    },
+    "context": {
+      "allowed_values": null,
+      "notes": null,
+      "ref_kinds": null,
+      "required": false,
+      "type": "str"
+    },
+    "contradicts": {
+      "allowed_values": null,
+      "notes": null,
+      "ref_kinds": null,
+      "required": false,
+      "type": "reflist"
+    },
+    "created_at": {
+      "allowed_values": null,
+      "notes": null,
+      "ref_kinds": null,
+      "required": true,
+      "type": "timestamp"
+    },
+    "decided_at": {
+      "allowed_values": null,
+      "notes": null,
+      "ref_kinds": null,
+      "required": false,
+      "type": "timestamp"
+    },
+    "decided_by": {
+      "allowed_values": null,
+      "notes": null,
+      "ref_kinds": null,
+      "required": false,
+      "type": "list"
+    },
+    "demo": {
+      "allowed_values": null,
+      "notes": "true marks clearly-labelled synthetic demo data",
+      "ref_kinds": null,
+      "required": false,
+      "type": "bool"
+    },
+    "duplicates": {
+      "allowed_values": null,
+      "notes": null,
+      "ref_kinds": null,
+      "required": false,
+      "type": "reflist"
+    },
+    "entities": {
+      "allowed_values": null,
+      "notes": null,
+      "ref_kinds": [
+        "entity"
+      ],
+      "required": false,
+      "type": "reflist"
+    },
+    "id": {
+      "allowed_values": null,
+      "notes": null,
+      "ref_kinds": null,
+      "required": true,
+      "type": "id"
+    },
+    "projects": {
+      "allowed_values": null,
+      "notes": null,
+      "ref_kinds": [
+        "project"
+      ],
+      "required": false,
+      "type": "reflist"
+    },
+    "related_to": {
+      "allowed_values": null,
+      "notes": null,
+      "ref_kinds": null,
+      "required": false,
+      "type": "reflist"
+    },
+    "review_status": {
+      "allowed_values": [
+        "not-required",
+        "pending",
+        "in-review",
+        "approved",
+        "rejected",
+        "disputed"
+      ],
+      "notes": null,
+      "ref_kinds": null,
+      "required": true,
+      "type": "enum"
+    },
+    "run_id": {
+      "allowed_values": null,
+      "notes": null,
+      "ref_kinds": [
+        "run"
+      ],
+      "required": false,
+      "type": "ref"
+    },
+    "sources": {
+      "allowed_values": null,
+      "notes": null,
+      "ref_kinds": [
+        "source"
+      ],
+      "required": false,
+      "type": "reflist"
+    },
+    "status": {
+      "allowed_values": [
+        "proposed",
+        "accepted",
+        "rejected",
+        "superseded",
+        "deprecated"
+      ],
+      "notes": null,
+      "ref_kinds": null,
+      "required": true,
+      "type": "enum"
+    },
+    "superseded_by": {
+      "allowed_values": null,
+      "notes": null,
+      "ref_kinds": null,
+      "required": false,
+      "type": "reflist"
+    },
+    "supersedes": {
+      "allowed_values": null,
+      "notes": null,
+      "ref_kinds": null,
+      "required": false,
+      "type": "reflist"
+    },
+    "supports": {
+      "allowed_values": null,
+      "notes": null,
+      "ref_kinds": null,
+      "required": false,
+      "type": "reflist"
+    },
+    "tags": {
+      "allowed_values": null,
+      "notes": null,
+      "ref_kinds": null,
+      "required": false,
+      "type": "list"
+    },
+    "title": {
+      "allowed_values": null,
+      "notes": null,
+      "ref_kinds": null,
+      "required": true,
+      "type": "str"
+    },
+    "trust_level": {
+      "allowed_values": [
+        "trusted",
+        "internal",
+        "untrusted",
+        "quarantined"
+      ],
+      "notes": null,
+      "ref_kinds": null,
+      "required": true,
+      "type": "enum"
+    },
+    "type": {
+      "allowed_values": null,
+      "notes": null,
+      "ref_kinds": null,
+      "required": true,
+      "type": "str"
+    },
+    "updated_at": {
+      "allowed_values": null,
+      "notes": null,
+      "ref_kinds": null,
+      "required": true,
+      "type": "timestamp"
+    }
+  },
+  "record_type": "decision",
+  "schema_version": "1.0.0"
+}

@@ -1,0 +1,22 @@
+# Derived, rebuildable artifacts - never the only copy of anything.
+indexes/vault.db
+indexes/vault.db-journal
+indexes/vault.db-wal
+indexes/vault.db-shm
+indexes/*.rebuilding
+__pycache__/
+*.pyc
+.DS_Store
+.vault-tmp-*
+
+# Never commit credentials.
+*.env
+.env
+.env.*
+*.pem
+*.key
+id_rsa*
+credentials.json
+secrets.yaml
+secrets.yml
+config/*.secret.*
