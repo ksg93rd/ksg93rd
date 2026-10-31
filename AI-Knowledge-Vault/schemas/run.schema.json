@@ -1,0 +1,233 @@
+{
+  "fields": {
+    "agent": {
+      "allowed_values": null,
+      "notes": null,
+      "ref_kinds": null,
+      "required": false,
+      "type": "str"
+    },
+    "completed_at": {
+      "allowed_values": null,
+      "notes": null,
+      "ref_kinds": null,
+      "required": false,
+      "type": "timestamp"
+    },
+    "cost_usd": {
+      "allowed_values": null,
+      "notes": null,
+      "ref_kinds": null,
+      "required": false,
+      "type": "str"
+    },
+    "created_at": {
+      "allowed_values": null,
+      "notes": null,
+      "ref_kinds": null,
+      "required": true,
+      "type": "timestamp"
+    },
+    "demo": {
+      "allowed_values": null,
+      "notes": "true marks clearly-labelled synthetic demo data",
+      "ref_kinds": null,
+      "required": false,
+      "type": "bool"
+    },
+    "errors": {
+      "allowed_values": null,
+      "notes": null,
+      "ref_kinds": null,
+      "required": false,
+      "type": "list"
+    },
+    "final_status": {
+      "allowed_values": [
+        "running",
+        "success",
+        "partial",
+        "failed",
+        "aborted"
+      ],
+      "notes": null,
+      "ref_kinds": null,
+      "required": false,
+      "type": "enum"
+    },
+    "id": {
+      "allowed_values": null,
+      "notes": null,
+      "ref_kinds": null,
+      "required": true,
+      "type": "id"
+    },
+    "inputs": {
+      "allowed_values": null,
+      "notes": null,
+      "ref_kinds": null,
+      "required": false,
+      "type": "list"
+    },
+    "objective": {
+      "allowed_values": null,
+      "notes": null,
+      "ref_kinds": null,
+      "required": true,
+      "type": "str"
+    },
+    "records_created": {
+      "allowed_values": null,
+      "notes": null,
+      "ref_kinds": null,
+      "required": false,
+      "type": "list"
+    },
+    "records_modified": {
+      "allowed_values": null,
+      "notes": null,
+      "ref_kinds": null,
+      "required": false,
+      "type": "list"
+    },
+    "records_read": {
+      "allowed_values": null,
+      "notes": null,
+      "ref_kinds": null,
+      "required": false,
+      "type": "list"
+    },
+    "retry_count": {
+      "allowed_values": null,
+      "notes": null,
+      "ref_kinds": null,
+      "required": false,
+      "type": "int"
+    },
+    "review_result": {
+      "allowed_values": [
+        "approved",
+        "rejected",
+        "disputed",
+        "needs-more-evidence",
+        "not-run",
+        "mixed"
+      ],
+      "notes": null,
+      "ref_kinds": null,
+      "required": false,
+      "type": "enum"
+    },
+    "run_id": {
+      "allowed_values": null,
+      "notes": null,
+      "ref_kinds": [
+        "run"
+      ],
+      "required": false,
+      "type": "ref"
+    },
+    "skill": {
+      "allowed_values": null,
+      "notes": null,
+      "ref_kinds": null,
+      "required": false,
+      "type": "str"
+    },
+    "started_at": {
+      "allowed_values": null,
+      "notes": null,
+      "ref_kinds": null,
+      "required": true,
+      "type": "timestamp"
+    },
+    "status": {
+      "allowed_values": [
+        "running",
+        "success",
+        "partial",
+        "failed",
+        "aborted"
+      ],
+      "notes": null,
+      "ref_kinds": null,
+      "required": true,
+      "type": "enum"
+    },
+    "tags": {
+      "allowed_values": null,
+      "notes": null,
+      "ref_kinds": null,
+      "required": false,
+      "type": "list"
+    },
+    "title": {
+      "allowed_values": null,
+      "notes": null,
+      "ref_kinds": null,
+      "required": true,
+      "type": "str"
+    },
+    "tokens_used": {
+      "allowed_values": null,
+      "notes": null,
+      "ref_kinds": null,
+      "required": false,
+      "type": "int"
+    },
+    "trigger": {
+      "allowed_values": null,
+      "notes": null,
+      "ref_kinds": null,
+      "required": true,
+      "type": "str"
+    },
+    "trust_level": {
+      "allowed_values": [
+        "trusted",
+        "internal",
+        "untrusted",
+        "quarantined"
+      ],
+      "notes": null,
+      "ref_kinds": null,
+      "required": true,
+      "type": "enum"
+    },
+    "type": {
+      "allowed_values": null,
+      "notes": null,
+      "ref_kinds": null,
+      "required": true,
+      "type": "str"
+    },
+    "updated_at": {
+      "allowed_values": null,
+      "notes": null,
+      "ref_kinds": null,
+      "required": true,
+      "type": "timestamp"
+    },
+    "validation_result": {
+      "allowed_values": [
+        "PASS",
+        "WARN",
+        "FAIL",
+        "not-run"
+      ],
+      "notes": null,
+      "ref_kinds": null,
+      "required": false,
+      "type": "enum"
+    },
+    "warnings": {
+      "allowed_values": null,
+      "notes": null,
+      "ref_kinds": null,
+      "required": false,
+      "type": "list"
+    }
+  },
+  "record_type": "run",
+  "schema_version": "1.0.0"
+}

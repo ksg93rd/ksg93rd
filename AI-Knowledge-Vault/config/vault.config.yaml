@@ -1,0 +1,26 @@
+# Operational configuration. Human-editable.
+schema_version: 1.0.0
+vault_name: AI Knowledge Vault
+storage: iCloud Drive (synchronization only - not version control, not a database)
+
+# Feature flags. Version 1 requires none of the optional ones.
+features:
+  semantic_search: false      # optional; keyword + metadata search is the fallback
+  auto_approve: false         # NEVER enable: the review gate must not be bypassed
+  auto_commit: true           # git-commit canonical changes after a successful run
+
+review:
+  require_independent_reviewer_for_high_risk: true
+  default_reviewer_role: reviewer
+
+ingestion:
+  extract_claims_by_default: false
+  max_claim_candidates: 12
+  supported_extensions:
+    - .md
+    - .txt
+    - .json
+    - .csv
+
+retry:
+  max_equivalent_failures: 3

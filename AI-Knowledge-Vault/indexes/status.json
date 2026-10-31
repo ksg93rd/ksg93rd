@@ -1,0 +1,64 @@
+{
+  "schema_version": "1.0.0",
+  "generated_at": "2026-08-24T21:35:45+00:00",
+  "vault_root": "/home/user/ksg93rd/AI-Knowledge-Vault",
+  "totals": {
+    "records": 25,
+    "sources": 4,
+    "claims": 6,
+    "entities": 1,
+    "decisions": 1,
+    "artifacts": 0,
+    "projects": 0,
+    "runs": 9,
+    "reviews": 4
+  },
+  "claims": {
+    "verified": 2,
+    "candidate": 3,
+    "disputed": 1,
+    "rejected": 0,
+    "superseded": 0,
+    "unknown": 0,
+    "pending_review": 3
+  },
+  "security": {
+    "quarantined_sources": 1,
+    "flagged_sources": 0,
+    "security_warnings": 5
+  },
+  "integrity": {
+    "validation_level": "PASS",
+    "fail_count": 0,
+    "warn_count": 0,
+    "broken_references": 0,
+    "duplicate_hashes": [],
+    "orphans": 0,
+    "load_errors": [],
+    "icloud_unavailable": 0
+  },
+  "indexes": {
+    "db_present": true,
+    "db_stale": false,
+    "db_stale_reason": "index is current",
+    "fts5": true,
+    "graph_generated_at": "2026-08-24T21:35:45+00:00",
+    "graph_nodes": 25,
+    "graph_edges": 43
+  },
+  "runs": {
+    "total": 9,
+    "recent_success": [
+      "run-20260824-213426-ad726f12",
+      "run-20260824-213346-270e9572",
+      "run-20260824-213346-2dffe61a",
+      "run-20260824-213346-62ed2876",
+      "run-20260824-213346-d576ca9a"
+    ],
+    "recent_failed": [
+      "run-20260824-213346-b0318e83"
+    ],
+    "last_run_at": "2026-08-24T21:34:26+00:00"
+  },
+  "demo_records": 22
+}

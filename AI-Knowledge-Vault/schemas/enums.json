@@ -1,0 +1,78 @@
+{
+  "decision_status": [
+    "proposed",
+    "accepted",
+    "rejected",
+    "superseded",
+    "deprecated"
+  ],
+  "evidence_strength": [
+    "none",
+    "weak",
+    "moderate",
+    "high"
+  ],
+  "relationship_types": [
+    "SUPPORTS",
+    "CONTRADICTS",
+    "SUPERSEDES",
+    "DERIVED_FROM",
+    "MENTIONS",
+    "RELATED_TO",
+    "PART_OF",
+    "PRODUCED_BY",
+    "REVIEWED_BY",
+    "DUPLICATES"
+  ],
+  "review_result": [
+    "approved",
+    "rejected",
+    "disputed",
+    "needs-more-evidence"
+  ],
+  "review_status": [
+    "not-required",
+    "pending",
+    "in-review",
+    "approved",
+    "rejected",
+    "disputed"
+  ],
+  "run_status": [
+    "running",
+    "success",
+    "partial",
+    "failed",
+    "aborted"
+  ],
+  "schema_version": "1.0.0",
+  "source_quality": [
+    "primary",
+    "secondary",
+    "tertiary",
+    "self-reported",
+    "ai-generated",
+    "unknown"
+  ],
+  "status": [
+    "unknown",
+    "candidate",
+    "verified",
+    "disputed",
+    "rejected",
+    "superseded"
+  ],
+  "trust_level": [
+    "trusted",
+    "internal",
+    "untrusted",
+    "quarantined"
+  ],
+  "verification_status": [
+    "unverified",
+    "verifying",
+    "verified",
+    "failed",
+    "not-applicable"
+  ]
+}
