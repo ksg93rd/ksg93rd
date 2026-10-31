@@ -36,12 +36,40 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
+      - name: Stage the site
+        # Publish the website only. Two things in this repo must never be
+        # served publicly: AI-Knowledge-Vault/, an installable template for a
+        # vault that is private by definition, and .claude/, which is agent
+        # configuration rather than site content. This site is public.
+        run: |
+          set -euo pipefail
+          mkdir -p _site
+          tar --exclude='./_site' \
+              --exclude='./.git' \
+              --exclude='./.claude' \
+              --exclude='./AI-Knowledge-Vault' \
+              -cf - . | tar -xf - -C _site
+          test ! -e _site/AI-Knowledge-Vault
+          test ! -e _site/.claude
+          test -f _site/index.html
+      - name: Verify the staged site still serves every browser asset
+        # Run node directly, NOT `npm run`: npm resolves the nearest package.json
+        # by walking up, which would silently test the repo root instead of the
+        # artifact and pass even if _site were empty.
+        run: |
+          set -euo pipefail
+          cd _site
+          node --test tests/staticApp.test.js
       - name: Upload static site artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: _site
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
